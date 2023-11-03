@@ -1,0 +1,4 @@
+# Ignore artifacts
+test/e2e
+package.json
+srv/util/types/entities
