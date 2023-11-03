@@ -1,0 +1,3 @@
+# Ignore artifacts
+test
+srv/util/types/entities
