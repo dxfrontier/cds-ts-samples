@@ -8,9 +8,10 @@ import {
   SRV,
   SingleInstanceCapable,
   type TypedRequest,
+  type Request,
+  type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
 import BookService from '../../../service/BookService';
-import { Request, Service } from '@sap/cds';
 import { Book } from '../../../util/types/entities/CatalogService';
 
 @EntityHandler(Book)

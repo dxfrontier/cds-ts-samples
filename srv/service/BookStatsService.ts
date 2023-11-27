@@ -1,7 +1,12 @@
-import { Service } from '@sap/cds';
-import { Inject, SRV, ServiceLogic } from '@dxfrontier/cds-ts-dispatcher';
+import {
+  Inject,
+  SRV,
+  ServiceLogic,
+  type Service,
+  type ActionRequest,
+  type TypedRequest,
+} from '@dxfrontier/cds-ts-dispatcher';
 import { type BookStat } from '../util/types/entities/CatalogService';
-import { type ActionRequest, type TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 import BookStatsRepository from '../repository/BookStatsRepository';
 import BookRepository from '../repository/BookRepository';
 

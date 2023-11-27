@@ -9,9 +9,12 @@ import {
   OnUpdate,
   SRV,
   SingleInstanceCapable,
+  type ActionRequest,
+  type ActionReturn,
+  type TypedRequest,
+  type Request,
+  type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { Request, Service } from '@sap/cds';
-import { type ActionRequest, type ActionReturn, type TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 import BookStatsService from '../../../service/BookStatsService';
 import { BookStat } from '../../../util/types/entities/CatalogService';
 import AuthorService from '../../../service/AuthorService';

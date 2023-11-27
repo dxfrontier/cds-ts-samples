@@ -8,8 +8,9 @@ import {
   SRV,
   SingleInstanceCapable,
   type TypedRequest,
+  type Request,
+  type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { Request, Service } from '@sap/cds';
 import { Review } from '../../../util/types/entities/CatalogService';
 import ReviewService from '../../../service/ReviewService';
 
