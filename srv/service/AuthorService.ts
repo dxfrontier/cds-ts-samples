@@ -1,5 +1,4 @@
-import { Service } from '@sap/cds';
-import { Inject, SRV, ServiceLogic } from '@dxfrontier/cds-ts-dispatcher';
+import { Inject, SRV, ServiceLogic, Service } from '@dxfrontier/cds-ts-dispatcher';
 import { type BookStat } from '../util/types/entities/CatalogService';
 import { type ActionRequest } from '@dxfrontier/cds-ts-dispatcher';
 

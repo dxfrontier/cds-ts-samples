@@ -9,8 +9,9 @@ import {
   OnSaveDraft,
   SRV,
   SingleInstanceCapable,
+  type Request,
+  type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { Request, Service } from '@sap/cds';
 import { BookEvent } from '../../../util/types/entities/CatalogService';
 
 @EntityHandler(BookEvent)

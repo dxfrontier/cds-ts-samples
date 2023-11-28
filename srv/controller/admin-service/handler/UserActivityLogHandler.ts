@@ -1,5 +1,12 @@
-import { AfterRead, EntityHandler, Inject, SRV, SingleInstanceCapable } from '@dxfrontier/cds-ts-dispatcher';
-import { Request, Service } from '@sap/cds';
+import {
+  AfterRead,
+  EntityHandler,
+  Inject,
+  SRV,
+  SingleInstanceCapable,
+  type Request,
+  type Service,
+} from '@dxfrontier/cds-ts-dispatcher';
 import { UserActivityLog } from '../../../util/types/entities/AdminService';
 
 @EntityHandler(UserActivityLog)

@@ -1,7 +1,14 @@
-import { type Request, Service } from '@sap/cds';
-import { Inject, SRV, ServiceLogic } from '@dxfrontier/cds-ts-dispatcher';
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import {
+  Inject,
+  SRV,
+  ServiceLogic,
+  type Service,
+  type Request,
+  type ActionRequest,
+  type TypedRequest,
+} from '@dxfrontier/cds-ts-dispatcher';
 import { type Book, type submitOrder } from '../util/types/entities/CatalogService';
-import { type ActionRequest, type TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 import BookRepository from '../repository/BookRepository';
 
 @ServiceLogic()
@@ -27,23 +34,24 @@ class BookService {
     const { book, quantity } = req.data;
     const bookFound = await this.bookRepository.findOne({ ID: book });
 
-    if (quantity < 1) {
-      return req.reject(400, `quantity has to be 1 or more`);
+    if (quantity) {
+      if (quantity < 1) {
+        return req.reject(400, `quantity has to be 1 or more`);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      if (!bookFound) {
+        return req.error(404, `Book #${book} doesn't exist`);
+      }
+
+      if (bookFound.stock !== null && quantity > bookFound.stock!) {
+        return req.reject(409, `${quantity} exceeds stock for book #${book}`);
+      }
+
+      await this.bookRepository.update(bookFound, {
+        stock: (bookFound.stock! -= quantity),
+      });
     }
-
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (!bookFound) {
-      return req.error(404, `Book #${book} doesn't exist`);
-    }
-
-    if (bookFound.stock !== null && quantity > bookFound.stock!) {
-      return req.reject(409, `${quantity} exceeds stock for book #${book}`);
-    }
-
-    await this.bookRepository.update(bookFound, {
-      stock: (bookFound.stock! -= quantity),
-    });
-
     await this.srv.emit('OrderedBook', { book, quantity, buyer: req.user.id });
 
     return { stock: bookFound.stock };
