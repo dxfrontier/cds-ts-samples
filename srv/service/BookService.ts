@@ -54,7 +54,7 @@ class BookService {
     }
     await this.srv.emit('OrderedBook', { book, quantity, buyer: req.user.id });
 
-    return { stock: bookFound.stock };
+    return { stock: bookFound!.stock };
   }
 }
 
