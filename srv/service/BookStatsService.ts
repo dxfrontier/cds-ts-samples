@@ -31,14 +31,14 @@ class BookStatsService {
     const bookStats = await this.bookStatsRepository.findOne({ ID: parseInt(statsID) });
     const book = await this.bookRepository.findOne({ ID: bookStats!.book_ID });
 
-    // You can check with 'if statement' if not-null (!) operator is not ok for you case
-    // if (book == null) {
-    //   // Handle the case where book is null
-    //   return req.reject(4004, 'item not found');
-    // }
+    // You can check with 'if statement' or with the if not-null (!) operator
+    if (book == null) {
+      // Handle the case where book is null
+      return req.reject(4004, 'item not found');
+    }
 
     return {
-      book: book!.title,
+      book: book.title,
       rating: bookStats!.averageRating,
       stats: bookStats!.views,
     };
