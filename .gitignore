@@ -1,5 +1,6 @@
 # CDS-Typer generated entities
 srv/util/types/entities
+@cds-models
 
 # Logs
 logs
