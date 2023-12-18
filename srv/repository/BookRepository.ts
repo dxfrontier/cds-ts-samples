@@ -1,6 +1,6 @@
+import { Book } from '#cds-models/CatalogService';
 import { Repository } from '@dxfrontier/cds-ts-dispatcher';
 import { BaseRepository } from '@dxfrontier/cds-ts-repository';
-import { Book } from '../util/types/entities/CatalogService';
 
 @Repository()
 class BookRepository extends BaseRepository<Book> {

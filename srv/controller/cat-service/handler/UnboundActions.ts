@@ -1,3 +1,4 @@
+import { submitOrder, submitOrderFunction } from '#cds-models/CatalogService';
 import {
   Inject,
   OnAction,
@@ -8,7 +9,6 @@ import {
   type ActionRequest,
   type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { submitOrder, submitOrderFunction } from '../../../util/types/entities/CatalogService';
 
 @UnboundActions()
 class UnboundActionsHandler {

@@ -1,5 +1,5 @@
+import type { BookStat } from '#cds-models/CatalogService';
 import { Inject, SRV, ServiceLogic, Service } from '@dxfrontier/cds-ts-dispatcher';
-import { type BookStat } from '../util/types/entities/CatalogService';
 import { type ActionRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @ServiceLogic()

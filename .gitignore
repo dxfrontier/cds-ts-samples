@@ -1,6 +1,6 @@
 # CDS-Typer generated entities
 srv/util/types/entities
-@cds-models
+# @cds-models
 
 # Logs
 logs
@@ -132,3 +132,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.DS_Store
