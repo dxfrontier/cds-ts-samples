@@ -6,9 +6,9 @@ import {
   type ActionRequest,
   type TypedRequest,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { type BookStat } from '../util/types/entities/CatalogService';
 import BookStatsRepository from '../repository/BookStatsRepository';
 import BookRepository from '../repository/BookRepository';
+import type { BookStat } from '#cds-models/CatalogService';
 
 @ServiceLogic()
 class BookStatsService {

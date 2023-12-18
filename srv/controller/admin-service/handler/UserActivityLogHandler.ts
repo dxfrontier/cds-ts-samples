@@ -1,3 +1,4 @@
+import { UserActivityLog } from '#cds-models/AdminService';
 import {
   AfterRead,
   EntityHandler,
@@ -7,7 +8,6 @@ import {
   type Request,
   type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { UserActivityLog } from '../../../util/types/entities/AdminService';
 
 @EntityHandler(UserActivityLog)
 class UserActivityLogHandler {

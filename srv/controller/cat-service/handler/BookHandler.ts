@@ -12,7 +12,7 @@ import {
   type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
 import BookService from '../../../service/BookService';
-import { Book } from '../../../util/types/entities/CatalogService';
+import { Book } from '#cds-models/CatalogService';
 
 @EntityHandler(Book)
 class BookHandler {

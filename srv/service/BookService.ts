@@ -8,8 +8,8 @@ import {
   type ActionRequest,
   type TypedRequest,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { type Book, type submitOrder } from '../util/types/entities/CatalogService';
 import BookRepository from '../repository/BookRepository';
+import type { Book, submitOrder } from '#cds-models/CatalogService';
 
 @ServiceLogic()
 class BookService {

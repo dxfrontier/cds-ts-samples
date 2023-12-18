@@ -11,8 +11,8 @@ import {
   type Request,
   type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
-import { Review } from '../../../util/types/entities/CatalogService';
 import ReviewService from '../../../service/ReviewService';
+import { Review } from '#cds-models/CatalogService';
 
 @EntityHandler(Review)
 class ReviewHandler {
