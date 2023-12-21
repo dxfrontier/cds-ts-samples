@@ -4,24 +4,23 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowJs" : true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strictNullChecks": true,
     "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports" : true,
-    "strictNullChecks": true,
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    
-    /* Allow decorators */
-
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
 
     /* Strictness */
     "strict": true,
-    "noUncheckedIndexedAccess": true,
- 
-    "lib": ["es2022"],
+    
+    /* Decorators */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
  
     "outDir": "./gen/srv",
     
