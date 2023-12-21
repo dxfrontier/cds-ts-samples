@@ -1,5 +1,5 @@
 {
-  "name": "cds-ts-samples-correct-version",
+  "name": "cds-ts-samples",
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@dxfrontier/cds-ts-dispatcher": "^0.1.18",
-    "@dxfrontier/cds-ts-repository": "^0.3.3",
+    "@dxfrontier/cds-ts-repository": "^0.3.4",
     "@sap/cds": "^7.5.0",
     "express": "^4.18.2"
   },
@@ -15,29 +15,39 @@
     "@cap-js/cds-typer": "^0.14.0",
     "@cap-js/sqlite": "^1.4.0",
     "@types/node": "^20.10.5",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.4.0",
+    "eslint-plugin-n": "^16.5.0",
     "eslint-plugin-promise": "^6.1.1",
-    "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "3.1.1",
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   },
   "scripts": {
+    "start": "npx cds run",
+    "start:ts": "cds-ts watch",
+
     "eslint": "npx eslint .",
     "eslint:fix": "npx eslint . --fix",
+    
     "prettier": "npx prettier . --check",
     "prettier:fix": "npx prettier . --write",
+    
     "check": "npm run eslint && npm run prettier",
+    
     "fix": "npm run eslint:fix && npm run prettier:fix",
-    "build:entities": "cds-typer '*' --outputDirectory ./srv/util/types/entities",
-    "prepare": "husky install",
-    "start": "npm run build:entities && cds-ts watch"
+    
+    "build:cds": "echo 'STEP 1 : Build CDS' && cds build --production",
+    "build:ts": "echo 'STEP 2 : Transpile TS => JS' && tsc",
+    "build:srv:clean:ts": "echo 'Step 3: Clean TS files from srv folder' && find gen/srv/srv -type f -name '*.ts' -delete",
+
+    "build:production": "run-s build:cds build:ts build:srv:clean:ts"
   },
   "lint-staged": {
     "**/*.{ts, tsx}": [

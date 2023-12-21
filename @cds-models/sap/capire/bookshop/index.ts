@@ -150,7 +150,8 @@ export function _PromotionAspect<TBase extends new (...args: any[]) => object>(B
         startDate?: string | null;
         endDate?: string | null;
         discount?: number | null;
-        books?: __.Association.to.many<Books>;
+        books?: __.Association.to<Book> | null;
+        books_ID?: number | null;
       static actions: {
     }
   };

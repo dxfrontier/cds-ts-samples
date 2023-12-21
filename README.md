@@ -29,11 +29,30 @@ In the `cds-ts-dispatcher-samples` folder, run:
 npm install
 ```
 
-## Run
+## Run server
 
 ```
-npm run start
+npm run start:ts
 ```
+
+## Deployment to BTP 
+
+```
+mbt build
+```
+This process will do the following : 
+
+1. Will run the builder from `mta.yaml`: 
+   
+```yml
+    - builder: custom
+      commands:
+        - npm ci
+        - npm run build:production
+        - npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models
+```
+
+Where `npm run build:production` is a `package.json` command for `cds build --production` and `tsc` 
 
 After that open this link in your browser: http://localhost:4004
 

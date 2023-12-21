@@ -63,7 +63,6 @@ entity Genres : sap.common.CodeList {
                    on children.parent = $self;
 }
 
-
 entity Reviews : managed {
   key ID       : Integer;
       book     : Association to Books;
@@ -113,7 +112,7 @@ entity Promotions {
       // Add more fields as needed
 
       // Associations
-      books       : Association to many Books;
+      books       : Association to Books;
 // Add more associations as needed
 }
 
