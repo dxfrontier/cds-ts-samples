@@ -71,6 +71,22 @@ export class Reviews extends Array<Review> {}
 Object.defineProperty(Review, 'name', { value: 'CatalogService.Reviews' })
 Object.defineProperty(Reviews, 'name', { value: 'CatalogService.Reviews' })
 
+export function _UserAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class User extends Base {
+        ID?: number | null;
+        username?: string | null;
+        email?: string | null;
+        role?: _.Roles | null;
+        reviews?: __.Association.to.many<_sap_capire_bookshop.Reviews>;
+      static actions: {
+    }
+  };
+}
+export class User extends _._managedAspect(_UserAspect(__.Entity)) {}
+export class Users extends Array<User> {}
+Object.defineProperty(User, 'name', { value: 'CatalogService.Users' })
+Object.defineProperty(Users, 'name', { value: 'CatalogService.Users' })
+
 export function _BookEventAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookEvent extends Base {
         name?: string | null;

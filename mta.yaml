@@ -1,0 +1,43 @@
+_schema-version: '3.1'
+ID: cds-ts-samples-correct-version
+version: 1.0.0
+description: 'A simple CAP project.'
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npm run build:production
+        - npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models
+
+modules:
+  - name: cds-ts-samples-correct-version-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: cds-ts-samples-correct-version-db
+
+  - name: cds-ts-samples-correct-version-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: cds-ts-samples-correct-version-db
+
+resources:
+  - name: cds-ts-samples-correct-version-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
