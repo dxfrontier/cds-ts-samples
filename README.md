@@ -35,6 +35,8 @@ npm install
 npm run start:ts
 ```
 
+Open this link in your browser: http://localhost:4004
+
 ## Deployment to BTP 
 
 ```
@@ -54,7 +56,7 @@ This process will do the following :
 
 Where `npm run build:production` is a `package.json` command for `cds build --production` and `tsc` 
 
-After that open this link in your browser: http://localhost:4004
+
 
 ## Contributing
 
