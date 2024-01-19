@@ -18,8 +18,13 @@ modules:
     path: gen/srv
     parameters:
       buildpack: nodejs_buildpack
+      memory: 512MB
+      disk-quota: 1024M
+      # Command start
+      command: node ./node_modules/@sap/cds/bin/cds-serve.js
     build-parameters:
       builder: npm
+      ignore: ['node_modules/']
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
