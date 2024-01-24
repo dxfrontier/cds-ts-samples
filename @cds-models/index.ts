@@ -1,17 +1,17 @@
 // This is an automatically generated file. Please do not change its contents manually!
-import * as _sap_common from './sap/common';
+import type * as _sap_common from './sap/common';
 import * as __ from './_';
 export type Language = __.Association.to<_sap_common.Language>;
 export type Currency = __.Association.to<_sap_common.Currency>;
 export type Country = __.Association.to<_sap_common.Country>;
 export type User = string;
-export type HelloRequest = {
+export interface HelloRequest {
     greeterName?: string | null;
     toName?: string | null;
-};
-export type HelloResponse = {
+}
+export interface HelloResponse {
     greetingMessage?: string | null;
-};
+}
 // enum
 export const Roles = {
   USER: "USER",
