@@ -21,8 +21,7 @@ export class Entity {
 }
 
 export type EntitySet<T> = T[] & {
-    data (input:object[]) : T[]
-    data (input:object) : T
+    data: ((input:object[]) => T[]) & ((input:object) => T)
 };
 
 export type DeepRequired<T> = { 

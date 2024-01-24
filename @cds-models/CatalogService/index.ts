@@ -1,6 +1,6 @@
 // This is an automatically generated file. Please do not change its contents manually!
 import * as _ from './..';
-import * as _sap_capire_bookshop from './../sap/capire/bookshop';
+import type * as _sap_capire_bookshop from './../sap/capire/bookshop';
 import * as __ from './../_';
 import * as _sap_common from './../sap/common';
 export default { name: 'CatalogService' }

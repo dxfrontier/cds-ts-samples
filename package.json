@@ -26,7 +26,6 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
-    "lint-staged": "^15.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "3.2.4",
     "rimraf": "^5.0.5",
@@ -35,27 +34,23 @@
   "scripts": {
     "start": "cds-ts watch",
 
+    "eslint:message": "echo 'ESLint started ...'",
     "eslint": "npx eslint .",
     "eslint:fix": "npx eslint . --fix",
     
+    "prettier:message": "echo 'Prettier started ...'",
     "prettier": "npx prettier . --check",
     "prettier:fix": "npx prettier . --write",
     
-    "check": "npm run eslint && npm run prettier",
+    "check": "run-s eslint:message eslint prettier:message prettier",
     
-    "fix": "npm run eslint:fix && npm run prettier:fix",
-    
+    "fix": "run-s eslint:message eslint:fix prettier:message prettier:fix",
+
     "build:cds": "echo 'STEP 1 : Build CDS' && cds build --production",
     "build:ts": "echo 'STEP 2 : Transpile TS => JS' && tsc",
     "build:srv:clean:ts": "echo 'Step 3: Clean TS files from srv folder' && find gen/srv/srv -type f -name '*.ts' -delete",
-
+    
     "build:production": "run-s build:cds build:ts build:srv:clean:ts"
-  },
-  "lint-staged": {
-    "**/*.{ts, tsx}": [
-      "npm run eslint:fix",
-      "npm run prettier:fix"
-    ]
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"

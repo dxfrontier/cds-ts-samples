@@ -1,7 +1,7 @@
 // This is an automatically generated file. Please do not change its contents manually!
 import * as __ from './../_';
 import * as _ from './..';
-import * as _sap_capire_bookshop from './../sap/capire/bookshop';
+import type * as _sap_capire_bookshop from './../sap/capire/bookshop';
 export default { name: 'AdminService' }
 export function _UserActivityLogAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class UserActivityLog extends Base {
