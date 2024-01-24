@@ -23,7 +23,7 @@ cd cds-ts-dispatcher-samples
 
 ## Setup
 
-In the `cds-ts-dispatcher-samples` folder, run:
+In the `cds-ts-dispatcher-samples` folder, run the following commands:
 
 ```
 npm install
@@ -32,30 +32,42 @@ npm install
 ## Run server
 
 ```
-npm run start:ts
+npm start
 ```
 
-Open this link in your browser: http://localhost:4004
+Open link in your browser: http://localhost:4004
 
 ## Deployment to BTP
 
+1. Install [**MTA Build tool**](https://cap.cloud.sap/docs/get-started/) globally:
+
+```bash
+npm install -g mbt
 ```
+
+2. Run the following command to build the `mta`:
+
+```bash
 mbt build
 ```
 
-This process will do the following :
-
-1. Will run the builder from `mta.yaml`:
+Will run the builder from `mta.yaml` which has the following npm commands :
 
 ```yml
 - builder: custom
   commands:
     - npm ci
+    - npm run fix
     - npm run build:production
     - npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models
 ```
 
-Where `npm run build:production` is a `package.json` command for `cds build --production` and `tsc`
+`Steps` explained :
+
+- `npm ci` - Will do a clean install.
+- `npm run fix` - Will run the ESLint and Prettier.
+- `npm run build:production` - will run the package.json script command for CDS build and transpilation of TS to JS and clean the `TS files`.
+- `npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models` - will make sure the @cds-models are generated.
 
 ## Contributing
 
