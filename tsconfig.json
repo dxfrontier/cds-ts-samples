@@ -25,8 +25,8 @@
     "outDir": "./gen/srv",
 
     "paths": {
-      "#cds-models/*": ["./@cds-models/*/index.ts"],
-    },
+      "#cds-models/*": ["./@cds-models/*/index.ts"]
+    }
   },
-  "include": ["./srv"],
+  "include": ["./srv"]
 }
