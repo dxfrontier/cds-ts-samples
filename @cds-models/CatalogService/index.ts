@@ -1,6 +1,6 @@
 // This is an automatically generated file. Please do not change its contents manually!
 import * as _ from './..';
-import type * as _sap_capire_bookshop from './../sap/capire/bookshop';
+import * as _sap_capire_bookshop from './../sap/capire/bookshop';
 import * as __ from './../_';
 import * as _sap_common from './../sap/common';
 export default { name: 'CatalogService' }
@@ -71,21 +71,36 @@ export class Reviews extends Array<Review> {}
 Object.defineProperty(Review, 'name', { value: 'CatalogService.Reviews' })
 Object.defineProperty(Reviews, 'name', { value: 'CatalogService.Reviews' })
 
-export function _UserAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
-  return class User extends Base {
-        ID?: number | null;
-        username?: string | null;
-        email?: string | null;
-        role?: _.Roles | null;
-        reviews?: __.Association.to.many<_sap_capire_bookshop.Reviews>;
+export function _PublisherAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class Publisher extends Base {
+        ID?: number;
+        name?: string | null;
       static actions: {
     }
   };
 }
-export class User extends _._managedAspect(_UserAspect(__.Entity)) {}
-export class Users extends Array<User> {}
-Object.defineProperty(User, 'name', { value: 'CatalogService.Users' })
-Object.defineProperty(Users, 'name', { value: 'CatalogService.Users' })
+export class Publisher extends _._managedAspect(_PublisherAspect(__.Entity)) {}
+export class Publishers extends Array<Publisher> {}
+Object.defineProperty(Publisher, 'name', { value: 'CatalogService.Publishers' })
+Object.defineProperty(Publishers, 'name', { value: 'CatalogService.Publishers' })
+
+export function _BookOrderAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class BookOrder extends Base {
+        ID?: number;
+        orderNumber?: string | null;
+        orderDate?: string | null;
+        totalAmount?: number | null;
+        status?: string | null;
+        customer?: __.Association.to<_sap_capire_bookshop.User> | null;
+        customer_ID?: number | null;
+      static actions: {
+    }
+  };
+}
+export class BookOrder extends _._managedAspect(_BookOrderAspect(__.Entity)) {}
+export class BookOrders extends Array<BookOrder> {}
+Object.defineProperty(BookOrder, 'name', { value: 'CatalogService.BookOrders' })
+Object.defineProperty(BookOrders, 'name', { value: 'CatalogService.BookOrders' })
 
 export function _BookEventAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookEvent extends Base {
@@ -160,6 +175,12 @@ export class Genres extends Array<Genre> {}
 Object.defineProperty(Genre, 'name', { value: 'sap.capire.bookshop.Genres' })
 Object.defineProperty(Genres, 'name', { value: 'sap.capire.bookshop.Genres' })
 
+// event
+export class OrderedBook {
+    book: __.DeepRequired<Book>['ID'] | null;
+    quantity: number | null;
+    buyer: string | null;
+}
 // function
 export declare const submitOrder: { (book: __.DeepRequired<Book>['ID'] | null, quantity: number | null): {
     stock?: number | null;

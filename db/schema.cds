@@ -10,6 +10,7 @@ using {
   BookTypes
 } from './cds-types/types';
 
+
 namespace sap.capire.bookshop;
 
 // **************************************************************************************************
@@ -34,6 +35,11 @@ entity Books : managed {
       stats    : Association to one BookStats
                    on stats.book = $self;
 
+}
+
+entity Publishers : managed {
+  key ID   : Integer;
+      name : String(111) @mandatory;
 }
 
 entity BookStats : managed {
@@ -62,6 +68,7 @@ entity Genres : sap.common.CodeList {
       children : Composition of many Genres
                    on children.parent = $self;
 }
+
 
 entity Reviews : managed {
   key ID       : Integer;
@@ -112,8 +119,16 @@ entity Promotions {
       // Add more fields as needed
 
       // Associations
-      books       : Association to Books;
-// Add more associations as needed
+      books       : Association to many Books;
 }
 
+entity BookOrders : managed {
+  key ID          : Integer;
+      orderNumber : String(20)           @mandatory;
+      orderDate   : Date                 @mandatory;
+      totalAmount : Decimal              @mandatory;
+      status      : String(50)           @mandatory; // Status of the order, e.g., 'Pending', 'Shipped', 'Delivered', etc.
+
+      customer    : Association to Users @mandatory; // Assuming each order is associated with a customer.
+}
 // **************************************************************************************************
