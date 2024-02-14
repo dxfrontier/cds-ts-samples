@@ -1,4 +1,4 @@
-import { submitOrder, submitOrderFunction } from '#cds-models/CatalogService';
+import { OrderedBook, submitOrder, submitOrderFunction } from '#cds-models/CatalogService';
 import {
   Inject,
   OnAction,
@@ -8,13 +8,22 @@ import {
   type ActionReturn,
   type ActionRequest,
   type Service,
+  type TypedRequest,
+  OnError,
+  OnEvent,
+  Use,
+  Request,
 } from '@dxfrontier/cds-ts-dispatcher';
+import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
+import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 
 @UnboundActions()
+@Use(MiddlewareEntity1, MiddlewareEntity2)
 class UnboundActionsHandler {
   @Inject(SRV) private readonly srv: Service;
 
   @OnAction(submitOrder)
+  // @Use(MiddlewareMethodAfterRead1)
   public async onActionMethod(
     req: ActionRequest<typeof submitOrder>,
     next: Function,
@@ -32,6 +41,18 @@ class UnboundActionsHandler {
     return {
       stock: req.data.quantity! + 1,
     };
+  }
+
+  @OnEvent(OrderedBook)
+  public async onEvent(req: TypedRequest<OrderedBook>) {
+    //
+  }
+
+  @OnError()
+  public onError(err: Error, req: Request): void {
+    if (req.entity === 'CatalogService.Publishers') {
+      err.message = 'OnError';
+    }
   }
 }
 
