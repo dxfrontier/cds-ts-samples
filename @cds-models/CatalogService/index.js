@@ -8,8 +8,10 @@ module.exports.Author = csn.Authors
 module.exports.Authors = csn.Authors
 module.exports.Review = csn.Reviews
 module.exports.Reviews = csn.Reviews
-module.exports.User = csn.Users
-module.exports.Users = csn.Users
+module.exports.Publisher = csn.Publishers
+module.exports.Publishers = csn.Publishers
+module.exports.BookOrder = csn.BookOrders
+module.exports.BookOrders = csn.BookOrders
 module.exports.BookEvent = csn.BookEvents
 module.exports.BookEvents = csn.BookEvents
 module.exports.BookStat = csn.BookStats
@@ -19,6 +21,7 @@ module.exports.Currencies = csn.Currencies
 module.exports.Genre = csn.Genres
 module.exports.Genres = csn.Genres
 // events
+module.exports.OrderedBook = 'CatalogService.OrderedBook'
 // actions
 module.exports.submitOrder = 'submitOrder'
 module.exports.submitOrderFunction = 'submitOrderFunction'

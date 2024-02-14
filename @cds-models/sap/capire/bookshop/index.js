@@ -3,6 +3,8 @@ const cds = require('@sap/cds')
 const csn = cds.entities('sap.capire.bookshop')
 module.exports.Book = csn.Books
 module.exports.Books = csn.Books
+module.exports.Publisher = csn.Publishers
+module.exports.Publishers = csn.Publishers
 module.exports.BookStat = csn.BookStats
 module.exports.BookStats = csn.BookStats
 module.exports.Author = csn.Authors
@@ -19,6 +21,8 @@ module.exports.UserActivityLog = csn.UserActivityLog
 module.exports.UserActivityLog_ = csn.UserActivityLog
 module.exports.Promotion = csn.Promotions
 module.exports.Promotions = csn.Promotions
+module.exports.BookOrder = csn.BookOrders
+module.exports.BookOrders = csn.BookOrders
 // events
 // actions
 // enums

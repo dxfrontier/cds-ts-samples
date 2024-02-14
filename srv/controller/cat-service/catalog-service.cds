@@ -5,7 +5,8 @@ service CatalogService {
   entity Books      as projection on my.Books;
   entity Authors    as projection on my.Authors
   entity Reviews    as projection on my.Reviews;
-  entity Users      as projection on my.Users;
+  entity Publishers as projection on my.Publishers;
+  entity BookOrders as projection on my.BookOrders;
 
   @odata.draft.enabled: true
   entity BookEvents as projection on my.BookEvents;
@@ -29,4 +30,9 @@ service CatalogService {
     stock : Integer
   };
 
+  event OrderedBook : {
+    book     : Books:ID;
+    quantity : Integer;
+    buyer    : String
+  };
 }

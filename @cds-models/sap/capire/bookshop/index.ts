@@ -33,6 +33,19 @@ export class Books extends Array<Book> {}
 Object.defineProperty(Book, 'name', { value: 'sap.capire.bookshop.Books' })
 Object.defineProperty(Books, 'name', { value: 'sap.capire.bookshop.Books' })
 
+export function _PublisherAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class Publisher extends Base {
+        ID?: number;
+        name?: string | null;
+      static actions: {
+    }
+  };
+}
+export class Publisher extends _._managedAspect(_PublisherAspect(__.Entity)) {}
+export class Publishers extends Array<Publisher> {}
+Object.defineProperty(Publisher, 'name', { value: 'sap.capire.bookshop.Publishers' })
+Object.defineProperty(Publishers, 'name', { value: 'sap.capire.bookshop.Publishers' })
+
 export function _BookStatAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookStat extends Base {
         ID?: number | null;
@@ -150,8 +163,7 @@ export function _PromotionAspect<TBase extends new (...args: any[]) => object>(B
         startDate?: string | null;
         endDate?: string | null;
         discount?: number | null;
-        books?: __.Association.to<Book> | null;
-        books_ID?: number | null;
+        books?: __.Association.to.many<Books>;
       static actions: {
     }
   };
@@ -160,3 +172,21 @@ export class Promotion extends _PromotionAspect(__.Entity) {}
 export class Promotions extends Array<Promotion> {}
 Object.defineProperty(Promotion, 'name', { value: 'sap.capire.bookshop.Promotions' })
 Object.defineProperty(Promotions, 'name', { value: 'sap.capire.bookshop.Promotions' })
+
+export function _BookOrderAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class BookOrder extends Base {
+        ID?: number;
+        orderNumber?: string | null;
+        orderDate?: string | null;
+        totalAmount?: number | null;
+        status?: string | null;
+        customer?: __.Association.to<User> | null;
+        customer_ID?: number | null;
+      static actions: {
+    }
+  };
+}
+export class BookOrder extends _._managedAspect(_BookOrderAspect(__.Entity)) {}
+export class BookOrders extends Array<BookOrder> {}
+Object.defineProperty(BookOrder, 'name', { value: 'sap.capire.bookshop.BookOrders' })
+Object.defineProperty(BookOrders, 'name', { value: 'sap.capire.bookshop.BookOrders' })
