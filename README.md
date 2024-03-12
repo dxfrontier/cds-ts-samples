@@ -80,7 +80,7 @@ Please make sure to update tests as appropriate.
 
 ![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)
 
-Copyright (c) 2023 DXFrontier
+Copyright (c) 2024 DXFrontier
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
