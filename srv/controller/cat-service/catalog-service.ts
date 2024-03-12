@@ -6,7 +6,7 @@ import ReviewHandler from './handler/ReviewHandler';
 import UnboundActionsHandler from './handler/UnboundActions';
 import { BookOrdersHandler } from './handler/BookOrdersHandler';
 
-module.exports = new CDSDispatcher([
+export = new CDSDispatcher([
   // Entities
   BookHandler,
   ReviewHandler,
