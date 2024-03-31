@@ -1,3 +1,5 @@
+import { Review } from '#cds-models/CatalogService';
+
 import {
   BeforeCreate,
   BeforeDelete,
@@ -5,14 +7,15 @@ import {
   BeforeUpdate,
   EntityHandler,
   Inject,
-  SRV,
+  Request,
+  Service,
   SingleInstanceCapable,
-  type TypedRequest,
-  type Request,
-  type Service,
+  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
+
 import ReviewService from '../../../service/ReviewService';
-import { Review } from '#cds-models/CatalogService';
+
+import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Review)
 class ReviewHandler {

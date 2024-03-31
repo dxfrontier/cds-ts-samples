@@ -1,15 +1,17 @@
 import { BookOrder } from '#cds-models/CatalogService';
+
 import {
   AfterRead,
+  BeforeRead,
   EntityHandler,
   Inject,
   Request,
-  SRV,
   Service,
   SingleInstanceCapable,
+  SRV,
   Use,
-  BeforeRead,
 } from '@dxfrontier/cds-ts-dispatcher';
+
 import { MiddlewareMethodAfterRead1 } from '../../../middleware/MiddlewareAfterRead1';
 import { MiddlewareMethodAfterRead2 } from '../../../middleware/MiddlewareAfterRead2';
 import { MiddlewareMethodBeforeRead } from '../../../middleware/MiddlewareBeforeRead';

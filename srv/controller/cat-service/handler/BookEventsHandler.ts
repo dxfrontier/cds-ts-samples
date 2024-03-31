@@ -1,4 +1,5 @@
 import { BookEvent } from '#cds-models/CatalogService';
+
 import {
   AfterRead,
   AfterReadDraft,
@@ -8,11 +9,11 @@ import {
   OnEditDraft,
   OnNewDraft,
   OnSaveDraft,
-  SRV,
   SingleInstanceCapable,
-  type Request,
-  type Service,
+  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
+
+import type { Request, Service } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookEvent)
 class BookEventsHandler {

@@ -1,3 +1,5 @@
+import { BookStat } from '#cds-models/CatalogService';
+
 import {
   EntityHandler,
   Inject,
@@ -7,18 +9,15 @@ import {
   OnDelete,
   OnRead,
   OnUpdate,
-  SRV,
   SingleInstanceCapable,
-  type ActionRequest,
-  type ActionReturn,
-  type TypedRequest,
-  type Request,
-  type Service,
+  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
-import BookStatsService from '../../../service/BookStatsService';
-import AuthorService from '../../../service/AuthorService';
+
 import AuthorRepository from '../../../repository/AuthorRepository';
-import { BookStat } from '#cds-models/CatalogService';
+import AuthorService from '../../../service/AuthorService';
+import BookStatsService from '../../../service/BookStatsService';
+
+import type { Request, Service, TypedRequest, ActionRequest, ActionReturn } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookStat)
 class BookStatsHandler {

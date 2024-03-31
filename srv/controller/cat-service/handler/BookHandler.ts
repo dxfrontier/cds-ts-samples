@@ -1,25 +1,27 @@
+import { Book } from '#cds-models/CatalogService';
+
 import {
   AfterCreate,
   AfterDelete,
   AfterRead,
   AfterUpdate,
+  BeforeRead,
   EntityHandler,
   Inject,
-  SRV,
+  Service,
   SingleInstanceCapable,
-  type TypedRequest,
-  type Request,
-  type Service,
-  BeforeRead,
+  SRV,
   Use,
 } from '@dxfrontier/cds-ts-dispatcher';
-import BookService from '../../../service/BookService';
-import { Book } from '#cds-models/CatalogService';
+
 import { MiddlewareMethodAfterRead1 } from '../../../middleware/MiddlewareAfterRead1';
 import { MiddlewareMethodAfterRead2 } from '../../../middleware/MiddlewareAfterRead2';
 import { MiddlewareMethodBeforeRead } from '../../../middleware/MiddlewareBeforeRead';
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
+import BookService from '../../../service/BookService';
+
+import type { TypedRequest, Request } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Book)
 @Use(MiddlewareEntity1, MiddlewareEntity2)

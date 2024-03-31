@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import {
-  Inject,
-  SRV,
-  ServiceLogic,
-  type Service,
-  type Request,
-  type ActionRequest,
-  type TypedRequest,
-} from '@dxfrontier/cds-ts-dispatcher';
+import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+
 import BookRepository from '../repository/BookRepository';
+
+import type { TypedRequest, Request, ActionRequest } from '@dxfrontier/cds-ts-dispatcher';
 import type { Book, submitOrder } from '#cds-models/CatalogService';
 
 @ServiceLogic()
@@ -32,7 +27,7 @@ class BookService {
 
   public async verifyStock(req: ActionRequest<typeof submitOrder>) {
     const { book, quantity } = req.data;
-    const bookFound = await this.bookRepository.findOne({ ID: book });
+    const bookFound = await this.bookRepository.findOne({ ID: book! });
 
     if (quantity) {
       if (quantity < 1) {

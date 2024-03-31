@@ -1,13 +1,10 @@
-import {
-  Inject,
-  SRV,
-  ServiceLogic,
-  type Service,
-  type ActionRequest,
-  type TypedRequest,
-} from '@dxfrontier/cds-ts-dispatcher';
-import BookStatsRepository from '../repository/BookStatsRepository';
+import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+
 import BookRepository from '../repository/BookRepository';
+import BookStatsRepository from '../repository/BookStatsRepository';
+
+import type { ActionRequest, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+
 import type { BookStat } from '#cds-models/CatalogService';
 
 @ServiceLogic()
@@ -29,7 +26,7 @@ class BookStatsService {
     const statsID = req.params[0] as string;
 
     const bookStats = await this.bookStatsRepository.findOne({ ID: parseInt(statsID) });
-    const book = await this.bookRepository.findOne({ ID: bookStats!.book_ID });
+    const book = await this.bookRepository.findOne({ ID: bookStats!.book_ID! });
 
     // You can check with 'if statement' or with the if not-null (!) operator
     if (book == null) {
