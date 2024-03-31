@@ -1,21 +1,21 @@
 import { OrderedBook, submitOrder, submitOrderFunction } from '#cds-models/CatalogService';
+
 import {
   Inject,
   OnAction,
-  OnFunction,
-  SRV,
-  UnboundActions,
-  type ActionReturn,
-  type ActionRequest,
-  type Service,
-  type TypedRequest,
   OnError,
   OnEvent,
-  Use,
+  OnFunction,
   Request,
+  SRV,
+  UnboundActions,
+  Use,
 } from '@dxfrontier/cds-ts-dispatcher';
+
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
+
+import type { ActionReturn, ActionRequest, Service, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @UnboundActions()
 @Use(MiddlewareEntity1, MiddlewareEntity2)

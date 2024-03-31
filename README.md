@@ -1,6 +1,22 @@
-# Welcome to CDS-TS-Dispatcher samples
+<h2> CDS-TS-Dispatcher and CDS-TS-Repository samples </h2>
 
-This Git samples repository was created as a reference on how to use the **[CDS-TS-Dispatcher](https://github.com/dxfrontier/cds-ts-dispatcher)** decorators.
+![SAP](https://img.shields.io/badge/SAP-0FAAFF?style=for-the-badge&logo=sap&logoColor=white)
+![ts-node](https://img.shields.io/badge/ts--node-3178C6?style=for-the-badge&logo=ts-node&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white)
+![json](https://img.shields.io/badge/json-5E5C5C?style=for-the-badge&logo=json&logoColor=white)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+This Git samples repository was created as a reference on how to use the **[CDS-TS-Dispatcher](https://github.com/dxfrontier/cds-ts-dispatcher)** decorators & **[CDS-TS-Repository](https://github.com/dxfrontier/cds-ts-repository)** actions.
+
+- [Prerequisites](#prerequisites)
+- [Download](#download)
+  - [Setup](#setup)
+  - [Run server](#run-server)
+- [Deployment to BTP](#deployment-to-btp)
+- [Contributing](#contributing)
+- [License](#license)
+- [Authors](#authors)
 
 ## Prerequisites
 
@@ -21,7 +37,7 @@ git clone https://github.com/dxfrontier/cds-ts-samples.git cds-ts-dispatcher-sam
 cd cds-ts-dispatcher-samples
 ```
 
-## Setup
+### Setup
 
 In the `cds-ts-dispatcher-samples` folder, run the following commands:
 
@@ -29,7 +45,7 @@ In the `cds-ts-dispatcher-samples` folder, run the following commands:
 npm install
 ```
 
-## Run server
+### Run server
 
 ```
 npm start
