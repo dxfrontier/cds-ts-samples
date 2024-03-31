@@ -1,6 +1,6 @@
-import { type TypedRequest } from '@sap/cds';
-import { type MiddlewareImpl, type Next } from '@dxfrontier/cds-ts-dispatcher';
-import { type Book } from '#cds-models/CatalogService';
+import type { Book } from '#cds-models/CatalogService';
+import type { TypedRequest } from '@sap/cds';
+import type { MiddlewareImpl, Next } from '@dxfrontier/cds-ts-dispatcher';
 
 export class MiddlewareEntity2 implements MiddlewareImpl {
   public async use(req: TypedRequest<Book>, next: Next) {
@@ -8,6 +8,6 @@ export class MiddlewareEntity2 implements MiddlewareImpl {
 
     req.notify('Middleware2');
 
-    next();
+    void next();
   }
 }
