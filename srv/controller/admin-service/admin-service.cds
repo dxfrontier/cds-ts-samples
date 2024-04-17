@@ -1,4 +1,4 @@
-using {sap.capire.bookshop as my} from '../../../db/schema';
+using {sap.capire.bookshop as Base} from '../../../db/schema';
 
 using {
   HelloRequest,
@@ -7,7 +7,14 @@ using {
 
 
 service AdminService {
-  entity UserActivityLog as projection on my.UserActivityLog;
-  entity Users           as projection on my.Users;
+  @odata.draft.enabled: true
+  entity UserActivityLog as projection on Base.UserActivityLog;
+
+  @odata.draft.enabled: true
+  entity Promotions      as projection on Base.Promotions;
+
+  @requires: 'authenticated-user'
+  entity Users           as projection on Base.Users;
+
   action sendMail(request : HelloRequest) returns HelloResponse;
 }

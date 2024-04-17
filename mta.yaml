@@ -25,13 +25,15 @@ modules:
       command: node ./node_modules/@sap/cds/bin/cds-serve.js
     build-parameters:
       builder: npm
-      ignore: ['node_modules/']
+      ignore:
+        - 'node_modules/'
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
     requires:
       - name: cds-ts-samples-correct-version-db
+      - name: cds-ts-samples-auth
 
   - name: cds-ts-samples-correct-version-db-deployer
     type: hdb
@@ -41,9 +43,34 @@ modules:
     requires:
       - name: cds-ts-samples-correct-version-db
 
+  - name: cds-ts-samples
+    type: approuter.nodejs
+    path: app/
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: cds-ts-samples-auth
+
 resources:
   - name: cds-ts-samples-correct-version-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: cds-ts-samples-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: cds-ts-samples-${org}-${space}
+        tenant-mode: dedicated

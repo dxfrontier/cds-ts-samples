@@ -17,7 +17,6 @@ namespace sap.capire.bookshop;
 // Catalog - Service
 // **************************************************************************************************
 
-
 entity Books : managed {
   key ID                  : Integer;
       title               : localized String(111)  @mandatory;
@@ -93,6 +92,17 @@ entity BookEvents : managed, cuid {
   name  : String;
   types : BookTypes
 
+}
+
+entity BookSales : managed, cuid {
+  key ID         : Integer;
+      saleDate   : Date; // Date of the sale
+      saleAmount : Decimal; // Amount of the sale
+      quantity   : Integer; // Quantity of books sold
+
+      // Associations
+      book       : Association to Books;
+      customer   : Association to Users;
 }
 
 

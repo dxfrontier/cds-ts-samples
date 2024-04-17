@@ -1,5 +1,3 @@
-import { Book } from '#cds-models/CatalogService';
-
 import {
   AfterCreate,
   AfterDelete,
@@ -7,13 +5,22 @@ import {
   AfterUpdate,
   BeforeRead,
   EntityHandler,
+  GetRequest,
   Inject,
+  IsColumnSupplied,
+  IsPresent,
+  IsRole,
+  Req,
+  Request,
+  Result,
+  Results,
   Service,
-  SingleInstanceCapable,
+  SingleInstanceSwitch,
   SRV,
   Use,
 } from '@dxfrontier/cds-ts-dispatcher';
 
+import { Book } from '../../../../@cds-models/CatalogService';
 import { MiddlewareMethodAfterRead1 } from '../../../middleware/MiddlewareAfterRead1';
 import { MiddlewareMethodAfterRead2 } from '../../../middleware/MiddlewareAfterRead2';
 import { MiddlewareMethodBeforeRead } from '../../../middleware/MiddlewareBeforeRead';
@@ -21,7 +28,7 @@ import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 import BookService from '../../../service/BookService';
 
-import type { TypedRequest, Request } from '@dxfrontier/cds-ts-dispatcher';
+import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Book)
 @Use(MiddlewareEntity1, MiddlewareEntity2)
@@ -30,39 +37,38 @@ class BookHandler {
   @Inject(BookService) private readonly bookService: BookService;
 
   @AfterCreate()
-  private async validateCurrencyCodes(result: Book, req: Request) {
+  private async afterCreate(@Result() result: Book, @Req() req: Request): Promise<void> {
     this.bookService.validateData(result, req);
   }
 
   @BeforeRead()
   @Use(MiddlewareMethodBeforeRead)
-  private async bla(req: Request) {
-    console.log('****************** Before read event');
+  private async beforeRead(@Req() req: TypedRequest<Book>): Promise<void> {
+    this.bookService.showConsoleLog();
   }
 
   @AfterRead()
-  @SingleInstanceCapable()
   @Use(MiddlewareMethodAfterRead1, MiddlewareMethodAfterRead2)
-  private async addDiscount(results: Book[], req: Request, isSingleInstance: boolean) {
-    await this.srv.emit('OrderedBook', { book: 'dada', quantity: 3, buyer: req.user.id });
-
-    if (isSingleInstance) {
-      req.notify('Single instance');
-    } else {
-      req.notify('Entity set');
-    }
-
-    this.bookService.enrichTitle(results);
+  private async afterRead(
+    @Req() req: Request,
+    @Results() results: Book[],
+    @SingleInstanceSwitch() singleInstance: boolean,
+    @IsColumnSupplied<Book>('price') hasPrice: boolean,
+    @IsPresent('SELECT', 'columns') hasColumns: boolean,
+    @IsRole('Developer', 'AnotherRole') role: boolean,
+    @GetRequest('locale') locale: Request['locale'],
+  ): Promise<void> {
+    await this.bookService.manageAfterReadMethods({ req, results, singleInstance });
   }
 
   @AfterUpdate()
-  private async addDefaultDescription(result: Book, req: TypedRequest<Book>) {
-    void this.bookService.addDefaultTitleText(result, req);
+  private async afterUpdate(@Result() result: Book, @Req() req: TypedRequest<Book>): Promise<void> {
+    await this.bookService.addDefaultTitleText(result, req);
   }
 
   @AfterDelete()
-  private async deleteItem(deleted: boolean, req: Request) {
-    req.notify(`Item deleted : ${deleted}`);
+  private async afterDelete(@Result() deleted: boolean, @Req() req: Request): Promise<void> {
+    this.bookService.notifyItemDeleted(req, deleted);
   }
 }
 

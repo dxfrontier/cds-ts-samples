@@ -1,40 +1,50 @@
-import { BookStat } from '#cds-models/CatalogService';
-
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import {
   EntityHandler,
   Inject,
+  Next,
   OnBoundAction,
   OnBoundFunction,
   OnCreate,
   OnDelete,
   OnRead,
   OnUpdate,
-  SingleInstanceCapable,
+  Req,
+  SingleInstanceSwitch,
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import AuthorRepository from '../../../repository/AuthorRepository';
+import { BookStat } from '../../../../@cds-models/CatalogService';
 import AuthorService from '../../../service/AuthorService';
 import BookStatsService from '../../../service/BookStatsService';
 
-import type { Request, Service, TypedRequest, ActionRequest, ActionReturn } from '@dxfrontier/cds-ts-dispatcher';
+import type {
+  TypedRequest,
+  Service,
+  Request,
+  ActionRequest,
+  ActionReturn,
+  NextEvent,
+} from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookStat)
 class BookStatsHandler {
   @Inject(SRV) private readonly srv: Service;
   @Inject(BookStatsService) private readonly bookStatsService: BookStatsService;
   @Inject(AuthorService) private readonly authorService: AuthorService;
-  @Inject(AuthorRepository) private readonly authorRepository: AuthorRepository;
 
   @OnCreate()
-  public async onCreateMethod(req: TypedRequest<BookStat>, next: Function) {
-    req.notify(201, 'On Create executed');
+  public async create(@Req() req: TypedRequest<BookStat>, @Next() next: NextEvent) {
+    this.bookStatsService.notifyCreated(req);
     return next();
   }
 
   @OnRead()
-  @SingleInstanceCapable()
-  public async onReadMethod(req: TypedRequest<BookStat>, next: Function, isSingleInstance: boolean) {
+  public async read(
+    @Req() req: TypedRequest<BookStat>,
+    @Next() next: NextEvent,
+    @SingleInstanceSwitch() isSingleInstance: boolean,
+  ) {
     if (isSingleInstance) {
       return await this.bookStatsService.updatedViews(req);
     }
@@ -43,30 +53,30 @@ class BookStatsHandler {
   }
 
   @OnUpdate()
-  public async onUpdateMethod(req: TypedRequest<BookStat>, next: Function) {
-    req.notify(201, 'On update executed');
+  public async update(@Req() req: TypedRequest<BookStat>, @Next() next: NextEvent) {
+    this.bookStatsService.notifyUpdated(req);
     return next();
   }
 
   @OnDelete()
-  public async onDeleteMethod(req: Request, _: Function) {
-    req.notify('Item deleted');
+  public async delete(@Req() req: Request, @Next() next: NextEvent) {
+    this.bookStatsService.notifyDeleted(req);
   }
 
   // This action will be triggered on the 'BookStat' entity
   @OnBoundAction(BookStat.actions.GenerateReport)
-  public async onBoundActionMethod(
-    req: ActionRequest<typeof BookStat.actions.GenerateReport>,
-    _: Function,
+  public async generateReport(
+    @Req() req: ActionRequest<typeof BookStat.actions.GenerateReport>,
+    @Next() next: NextEvent,
   ): ActionReturn<typeof BookStat.actions.GenerateReport> {
     return await this.bookStatsService.handleReport(req);
   }
 
   // This function will be triggered on the 'BookStat' entity
   @OnBoundFunction(BookStat.actions.NotifyAuthor)
-  public async onBoundFunctionMethod(
-    req: ActionRequest<typeof BookStat.actions.NotifyAuthor>,
-    _: Function,
+  public async notifyAuthor(
+    @Req() req: ActionRequest<typeof BookStat.actions.NotifyAuthor>,
+    @Next() next: NextEvent,
   ): ActionReturn<typeof BookStat.actions.NotifyAuthor> {
     return await this.authorService.notifyAuthor(req);
   }

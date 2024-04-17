@@ -1,13 +1,16 @@
 import { BookOrder } from '#cds-models/CatalogService';
 
 import {
+  AfterCreate,
   AfterRead,
   BeforeRead,
   EntityHandler,
   Inject,
+  Req,
   Request,
+  Results,
   Service,
-  SingleInstanceCapable,
+  SingleInstanceSwitch,
   SRV,
   Use,
 } from '@dxfrontier/cds-ts-dispatcher';
@@ -17,22 +20,36 @@ import { MiddlewareMethodAfterRead2 } from '../../../middleware/MiddlewareAfterR
 import { MiddlewareMethodBeforeRead } from '../../../middleware/MiddlewareBeforeRead';
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
+import BookOrdersService from '../../../service/BookOrdersService';
 import BookService from '../../../service/BookService';
 
 @EntityHandler(BookOrder)
 @Use(MiddlewareEntity1, MiddlewareEntity2)
-export class BookOrdersHandler {
+class BookOrdersHandler {
   @Inject(SRV) private readonly srv: Service;
   @Inject(BookService) private readonly bookService: BookService;
+  @Inject(BookOrdersService) private readonly bookOrdersService: BookOrdersService;
+
+  @AfterCreate()
+  private async afterCreate(@Results() result: BookOrder, @Req() req: Request): Promise<void> {
+    this.bookService.validateData(result, req);
+  }
 
   @BeforeRead()
   @Use(MiddlewareMethodBeforeRead) // THIS IS OK
-  private async bla(req: Request) {
-    console.log('****************** Before read event');
+  private async beforeRead(req: Request): Promise<void> {
+    this.bookOrdersService.showBeforeReadNotify();
   }
 
   @AfterRead()
-  @SingleInstanceCapable()
   @Use(MiddlewareMethodAfterRead1, MiddlewareMethodAfterRead2) // THIS IS OK
-  private async addDiscount(results: BookOrder[], req: Request, isSingleInstance: boolean) {}
+  private async afterRead(
+    @Results() results: BookOrder[],
+    @Req() req: Request,
+    @SingleInstanceSwitch() isSingleInstance: boolean,
+  ): Promise<void> {
+    // Method implementation
+  }
 }
+
+export default BookOrdersHandler;
