@@ -54,7 +54,7 @@ npm start
 Open link in your browser: http://localhost:4004
 
 > [!IMPORTANT]
-> Use 'Manager' as user and password 'Manager' to access the services
+> Use 'manager' as user and password 'manager' to access the services where prompt user and password.
 
 ## Deployment to BTP
 
