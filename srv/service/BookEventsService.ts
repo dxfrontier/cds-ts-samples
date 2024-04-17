@@ -6,23 +6,23 @@ import { Inject, Request, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-
 class BookEventsService {
   @Inject(SRV) private readonly srv: Service;
 
-  public async showNewDraftMessage(req: Request) {
+  public showNewDraftMessage(req: Request) {
     req.notify('On new draft');
   }
 
-  public async showCancelDraftMessage(req: Request) {
+  public showCancelDraftMessage(req: Request) {
     req.notify('On cancel draft');
   }
 
-  public async showEditDraftMessage(req: Request) {
+  public showEditDraftMessage(req: Request) {
     req.notify('On edit draft');
   }
 
-  public async showSaveDraftMessage(req: Request) {
+  public showSaveDraftMessage(req: Request) {
     req.notify('On save draft');
   }
 
-  public async handleSingleInstance(req: Request, results: BookEvent[], isSingleInstance: boolean) {
+  public handleSingleInstance(req: Request, results: BookEvent[], isSingleInstance: boolean) {
     if (isSingleInstance) {
       req.notify('Single instance');
     }
