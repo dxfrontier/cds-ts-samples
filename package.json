@@ -5,19 +5,18 @@
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
-  "engines": {
-    "node": "^20"
-  },
   "dependencies": {
-    "@dxfrontier/cds-ts-dispatcher": "^1.1.0",
-    "@dxfrontier/cds-ts-repository": "^1.0.12",
-    "@sap/cds": "^7.8.0",
-    "express": "^4.19.2"
+    "@dxfrontier/cds-ts-dispatcher": "^2.0.9",
+    "@dxfrontier/cds-ts-repository": "^1.0.15",
+    "@sap/cds": "^7.8.1",
+    "express": "^4.19.2",
+    "@sap/xssec": "^3.6.1",
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@cap-js/cds-typer": "^0.19.0",
     "@cap-js/sqlite": "^1.6.0",
-    "@types/node": "^20.12.2",
+    "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.57.0",
@@ -29,30 +28,46 @@
     "npm-run-all": "^4.1.5",
     "prettier": "3.2.5",
     "rimraf": "^5.0.5",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "start": "cds-ts watch",
-
     "eslint:message": "echo 'ESLint started ...'",
     "eslint": "npx eslint .",
     "eslint:fix": "npx eslint . --fix",
-    
     "prettier:message": "echo 'Prettier started ...'",
     "prettier": "npx prettier . --check",
     "prettier:fix": "npx prettier . --write",
-    
     "check": "run-s eslint:message eslint prettier:message prettier",
-    
     "fix": "run-s eslint:message eslint:fix prettier:message prettier:fix",
-
     "build:cds": "echo 'STEP 1 : Build CDS' && cds build --production",
     "build:ts": "echo 'STEP 2 : Transpile TS => JS' && tsc",
     "build:srv:clean:ts": "echo 'Step 3: Clean TS files from srv folder' && find gen/srv/srv -type f -name '*.ts' -delete",
-    
     "build:production": "run-s build:cds build:ts build:srv:clean:ts"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sql"
+      },
+      "auth": {
+        "kind": "basic",
+        "users": {
+          "manager": {
+            "roles": [
+              "Manager"
+            ]
+          },
+          "user": {
+            "roles": [
+              "User"
+            ]
+          }
+        }
+      }
+    }
   }
 }

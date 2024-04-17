@@ -1,32 +1,55 @@
-import { OrderedBook, submitOrder, submitOrderFunction } from '#cds-models/CatalogService';
-
 import {
+  Error,
+  FieldsFormatter,
   Inject,
+  Next,
   OnAction,
   OnError,
   OnEvent,
   OnFunction,
+  Req,
   Request,
+  Service,
   SRV,
   UnboundActions,
   Use,
+  Validate,
 } from '@dxfrontier/cds-ts-dispatcher';
 
+import {
+  changeBookProperties,
+  OrderedBook,
+  submitOrder,
+  submitOrderFunction,
+} from '../../../../@cds-models/CatalogService';
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 
-import type { ActionReturn, ActionRequest, Service, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+import type { ExposeFields, ActionReturn, ActionRequest, NextEvent, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @UnboundActions()
 @Use(MiddlewareEntity1, MiddlewareEntity2)
 class UnboundActionsHandler {
   @Inject(SRV) private readonly srv: Service;
 
+  @OnAction(changeBookProperties)
+  @FieldsFormatter<ExposeFields<typeof changeBookProperties>>({ action: 'toLower' }, 'language')
+  @FieldsFormatter<ExposeFields<typeof changeBookProperties>>({ action: 'ltrim' }, 'language')
+  @Validate<ExposeFields<typeof changeBookProperties>>({ action: 'isIn', values: ['PDF', 'E-Kindle'] }, 'format')
+  public async changeBookProperties(
+    @Req() req: ActionRequest<typeof changeBookProperties>,
+    @Next() next: NextEvent,
+  ): ActionReturn<typeof changeBookProperties> {
+    return {
+      language: req.data.language,
+      format: req.data.format,
+    };
+  }
+
   @OnAction(submitOrder)
-  // @Use(MiddlewareMethodAfterRead1)
-  public async onActionMethod(
-    req: ActionRequest<typeof submitOrder>,
-    next: Function,
+  public async submitOrder(
+    @Req() req: ActionRequest<typeof submitOrder>,
+    @Next() next: NextEvent,
   ): ActionReturn<typeof submitOrder> {
     return {
       stock: req.data.quantity! + 1,
@@ -34,9 +57,9 @@ class UnboundActionsHandler {
   }
 
   @OnFunction(submitOrderFunction)
-  public async onFunctionMethod(
-    req: ActionRequest<typeof submitOrderFunction>,
-    next: Function,
+  public async submitOrderFunction(
+    @Req() req: ActionRequest<typeof submitOrderFunction>,
+    @Next() next: NextEvent,
   ): ActionReturn<typeof submitOrderFunction> {
     return {
       stock: req.data.quantity! + 1,
@@ -44,12 +67,14 @@ class UnboundActionsHandler {
   }
 
   @OnEvent(OrderedBook)
-  public async onEvent(req: TypedRequest<OrderedBook>) {
-    //
+  public async orderedBook(req: TypedRequest<OrderedBook>) {
+    if (req.event !== 'OrderedBook') {
+      req.reject(400, 'Not OrderedBook: check @OnEvent decorator');
+    }
   }
 
   @OnError()
-  public onError(err: Error, req: Request): void {
+  public error(@Error() err: Error, @Req() req: Request): void {
     if (req.entity === 'CatalogService.Publishers') {
       err.message = 'OnError';
     }

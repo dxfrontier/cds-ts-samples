@@ -1,62 +1,63 @@
-import { BookEvent } from '#cds-models/CatalogService';
-
 import {
   AfterRead,
   AfterReadDraft,
   EntityHandler,
   Inject,
+  Next,
   OnCancelDraft,
   OnEditDraft,
   OnNewDraft,
   OnSaveDraft,
-  SingleInstanceCapable,
+  Req,
+  Request,
+  Results,
+  Service,
+  SingleInstanceSwitch,
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import type { Request, Service } from '@dxfrontier/cds-ts-dispatcher';
+import { BookEvent } from '../../../../@cds-models/CatalogService';
+import BookEventsService from '../../../service/BookEventsService';
+
+import type { NextEvent } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookEvent)
 class BookEventsHandler {
   @Inject(SRV) private readonly srv: Service;
+  @Inject(BookEventsService) private readonly bookEventsService: BookEventsService;
 
   @OnNewDraft()
-  public async onNewDraftMethod(req: Request, next: Function) {
-    req.notify('On new draft');
+  public async newDraft(@Req() req: Request, @Next() next: NextEvent) {
+    this.bookEventsService.showNewDraftMessage(req);
     return next();
   }
 
   @OnCancelDraft()
-  public async onCancelDraftMethod(req: Request, next: Function) {
-    req.notify('On cancel draft');
+  public async cancel(@Req() req: Request, @Next() next: NextEvent) {
+    this.bookEventsService.showCancelDraftMessage(req);
     return next();
   }
 
   @OnEditDraft()
-  public async onEditDraftMethod(req: Request, next: Function) {
-    req.notify('On edit draft');
+  public async edit(@Req() req: Request, @Next() next: NextEvent) {
+    this.bookEventsService.showEditDraftMessage(req);
     return next();
   }
 
   @OnSaveDraft()
-  public async onSaveDraftMethod(req: Request, next: Function) {
-    req.notify('On save draft');
+  public async save(@Req() req: Request, @Next() next: NextEvent) {
+    this.bookEventsService.showSaveDraftMessage(req);
     return next();
   }
 
   @AfterRead()
   @AfterReadDraft()
-  @SingleInstanceCapable()
-  public async afterReadDraftMethod(results: BookEvent[], req: Request, isSingleInstance: boolean) {
-    // handle single instance
-    if (results.length === 0) {
-      return;
-    }
-
-    if (isSingleInstance) {
-      req.notify('Single instance');
-    }
-
-    // handle entity set
+  public async afterReadDraft(
+    @Results() results: BookEvent[],
+    @Req() req: Request,
+    @SingleInstanceSwitch() isSingleInstance: boolean,
+  ): Promise<void> {
+    this.bookEventsService.handleSingleInstance(req, results, isSingleInstance);
   }
 }
 

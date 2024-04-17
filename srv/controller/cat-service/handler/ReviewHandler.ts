@@ -1,5 +1,3 @@
-import { Review } from '#cds-models/CatalogService';
-
 import {
   BeforeCreate,
   BeforeDelete,
@@ -7,12 +5,14 @@ import {
   BeforeUpdate,
   EntityHandler,
   Inject,
+  Req,
   Request,
   Service,
-  SingleInstanceCapable,
+  SingleInstanceSwitch,
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
+import { Review } from '../../../../@cds-models/CatalogService';
 import ReviewService from '../../../service/ReviewService';
 
 import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
@@ -23,24 +23,23 @@ class ReviewHandler {
   @Inject(ReviewService) private readonly reviewService: ReviewService;
 
   @BeforeCreate()
-  private async validateCurrencyCodes(req: TypedRequest<Review>) {
+  private async beforeCreate(@Req() req: TypedRequest<Review>) {
     this.reviewService.validateComment(req);
   }
 
   @BeforeRead()
-  @SingleInstanceCapable()
-  private async addDiscount(req: TypedRequest<Review>, isSingleInstance: boolean) {
-    req.notify(400, 'Before read executed');
+  private async beforeRead(@Req() req: TypedRequest<Review>, @SingleInstanceSwitch() isSingleInstance: boolean) {
+    this.reviewService.notifyRead(req);
   }
 
   @BeforeUpdate()
-  private async addDefaultDescription(req: TypedRequest<Review>) {
+  private async beforeUpdate(@Req() req: TypedRequest<Review>) {
     this.reviewService.validateComment(req);
   }
 
   @BeforeDelete()
-  private async deleteItem(req: Request) {
-    req.notify(204, 'Item deleted');
+  private async beforeDelete(@Req() req: Request) {
+    this.reviewService.notifyDelete(req);
   }
 }
 

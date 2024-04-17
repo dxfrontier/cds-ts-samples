@@ -1,31 +1,41 @@
-import { UserActivityLog } from '#cds-models/AdminService';
 import {
-  AfterRead,
+  BeforeDeleteDraft,
+  BeforeEditDraft,
+  BeforeNewDraft,
+  BeforeSaveDraft,
   EntityHandler,
   Inject,
+  Req,
+  Service,
   SRV,
-  SingleInstanceCapable,
-  type Request,
-  type Service,
 } from '@dxfrontier/cds-ts-dispatcher';
+
+import { UserActivityLog } from '../../../../@cds-models/AdminService';
+
+import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(UserActivityLog)
 class UserActivityLogHandler {
   @Inject(SRV) private readonly srv: Service;
 
-  @AfterRead()
-  @SingleInstanceCapable()
-  public async afterReadDraftMethod(results: UserActivityLog[], req: Request, isSingleInstance: boolean) {
-    // handle single instance
-    if (results.length === 0) {
-      return;
-    }
+  @BeforeNewDraft()
+  public async beforeNewDraft(@Req() req: TypedRequest<UserActivityLog>): Promise<void> {
+    req.notify(201, 'Before new draft executed');
+  }
 
-    if (isSingleInstance) {
-      req.notify('Single instance');
-    }
+  @BeforeSaveDraft()
+  public async beforeSaveDraft(@Req() req: TypedRequest<UserActivityLog>): Promise<void> {
+    req.notify(201, 'Before save draft executed');
+  }
 
-    // handle entity set
+  @BeforeEditDraft()
+  public async beforeEditDraft(@Req() req: TypedRequest<UserActivityLog>): Promise<void> {
+    req.notify(201, 'Before edit draft executed');
+  }
+
+  @BeforeDeleteDraft()
+  public async beforeDeleteDraft(@Req() req: TypedRequest<UserActivityLog>): Promise<void> {
+    // ...
   }
 }
 

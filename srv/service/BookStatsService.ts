@@ -1,17 +1,28 @@
-import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+import { Inject, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
 
 import BookRepository from '../repository/BookRepository';
 import BookStatsRepository from '../repository/BookStatsRepository';
 
-import type { ActionRequest, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
-
-import type { BookStat } from '#cds-models/CatalogService';
+import type { ActionRequest, Request, Service, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+import type { BookStat } from '../../@cds-models/CatalogService';
 
 @ServiceLogic()
 class BookStatsService {
   @Inject(SRV) private readonly srv: Service;
   @Inject(BookStatsRepository) private readonly bookStatsRepository: BookStatsRepository;
   @Inject(BookRepository) private readonly bookRepository: BookRepository;
+
+  public notifyDeleted(req: Request) {
+    req.notify('Item deleted');
+  }
+
+  public notifyUpdated(req: Request) {
+    req.notify(201, 'On update executed');
+  }
+
+  public notifyCreated(req: Request) {
+    req.notify(201, 'On Create executed');
+  }
 
   public async updatedViews(req: TypedRequest<BookStat>) {
     await this.bookStatsRepository.update({ ID: 2 }, { views: 444233 });
@@ -28,14 +39,8 @@ class BookStatsService {
     const bookStats = await this.bookStatsRepository.findOne({ ID: parseInt(statsID) });
     const book = await this.bookRepository.findOne({ ID: bookStats!.book_ID! });
 
-    // You can check with 'if statement' or with the if not-null (!) operator
-    if (book == null) {
-      // Handle the case where book is null
-      return req.reject(4004, 'item not found');
-    }
-
     return {
-      book: book.title,
+      book: book!.title,
       rating: bookStats!.averageRating,
       stats: bookStats!.views,
     };

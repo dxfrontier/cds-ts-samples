@@ -1,15 +1,46 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+import {
+  ActionRequest,
+  Inject,
+  Request,
+  Service,
+  ServiceLogic,
+  SRV,
+  TypedRequest,
+} from '@dxfrontier/cds-ts-dispatcher';
 
 import BookRepository from '../repository/BookRepository';
 
-import type { TypedRequest, Request, ActionRequest } from '@dxfrontier/cds-ts-dispatcher';
-import type { Book, submitOrder } from '#cds-models/CatalogService';
-
+import type { Book, submitOrder } from '../../@cds-models/CatalogService';
 @ServiceLogic()
 class BookService {
   @Inject(SRV) private readonly srv: Service;
   @Inject(BookRepository) private readonly bookRepository: BookRepository;
+
+  public async manageAfterReadMethods(args: { req: Request; results: Book[]; singleInstance: boolean }) {
+    await this.emitOrderedBookData(args.req);
+    this.notifySingleInstance(args.req, args.singleInstance);
+    this.enrichTitle(args.results);
+  }
+
+  public notifyItemDeleted(req: Request, deleted: boolean) {
+    req.notify(`Item deleted : ${deleted}`);
+  }
+
+  public async emitOrderedBookData(req: Request) {
+    await this.srv.emit('OrderedBook', { book: 'dada', quantity: 3, buyer: req.user.id });
+  }
+
+  public showConsoleLog() {
+    console.log('****************** Before read event');
+  }
+
+  public notifySingleInstance(req: Request, singleInstance: boolean) {
+    if (singleInstance) {
+      req.notify('Single instance');
+    } else {
+      req.notify('Entity set');
+    }
+  }
 
   public enrichTitle(results: Book[]) {
     results.map((book) => (book.title += ` -- 10 % discount!`));
@@ -29,7 +60,7 @@ class BookService {
     const { book, quantity } = req.data;
     const bookFound = await this.bookRepository.findOne({ ID: book! });
 
-    if (quantity) {
+    if (quantity != null) {
       if (quantity < 1) {
         return req.reject(400, `quantity has to be 1 or more`);
       }

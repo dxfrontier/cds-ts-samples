@@ -128,6 +128,25 @@ Object.defineProperty(BookEvent, 'name', { value: 'sap.capire.bookshop.BookEvent
 export class BookEvents extends Array<BookEvent> {static drafts: typeof BookEvent}
 Object.defineProperty(BookEvents, 'name', { value: 'sap.capire.bookshop.BookEvents' })
 
+export function _BookSaleAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class BookSale extends Base {
+        ID?: number;
+        saleDate?: string | null;
+        saleAmount?: number | null;
+        quantity?: number | null;
+        book?: __.Association.to<Book> | null;
+        book_ID?: number | null;
+        customer?: __.Association.to<User> | null;
+        customer_ID?: number | null;
+      static actions: {
+      }
+  };
+}
+export class BookSale extends _._managedAspect(_._cuidAspect(_BookSaleAspect(__.Entity))) {}
+Object.defineProperty(BookSale, 'name', { value: 'sap.capire.bookshop.BookSales' })
+export class BookSales extends Array<BookSale> {}
+Object.defineProperty(BookSales, 'name', { value: 'sap.capire.bookshop.BookSales' })
+
 export function _UserAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class User extends Base {
         ID?: number | null;
@@ -152,9 +171,9 @@ export function _UserActivityLogAspect<TBase extends new (...args: any[]) => obj
       }
   };
 }
-export class UserActivityLog extends _._managedAspect(_UserActivityLogAspect(__.Entity)) {}
+export class UserActivityLog extends _._managedAspect(_UserActivityLogAspect(__.Entity)) {static drafts: typeof UserActivityLog}
 Object.defineProperty(UserActivityLog, 'name', { value: 'sap.capire.bookshop.UserActivityLog' })
-export class UserActivityLog_ extends Array<UserActivityLog> {}
+export class UserActivityLog_ extends Array<UserActivityLog> {static drafts: typeof UserActivityLog}
 Object.defineProperty(UserActivityLog_, 'name', { value: 'sap.capire.bookshop.UserActivityLog' })
 
 export function _PromotionAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
@@ -170,9 +189,9 @@ export function _PromotionAspect<TBase extends new (...args: any[]) => object>(B
       }
   };
 }
-export class Promotion extends _PromotionAspect(__.Entity) {}
+export class Promotion extends _PromotionAspect(__.Entity) {static drafts: typeof Promotion}
 Object.defineProperty(Promotion, 'name', { value: 'sap.capire.bookshop.Promotions' })
-export class Promotions extends Array<Promotion> {}
+export class Promotions extends Array<Promotion> {static drafts: typeof Promotion}
 Object.defineProperty(Promotions, 'name', { value: 'sap.capire.bookshop.Promotions' })
 
 export function _BookOrderAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {

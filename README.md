@@ -53,6 +53,9 @@ npm start
 
 Open link in your browser: http://localhost:4004
 
+> [!IMPORTANT]
+> Use 'Manager' as user and password 'Manager' to access the services
+
 ## Deployment to BTP
 
 1. Install [**MTA Build tool**](https://cap.cloud.sap/docs/get-started/) globally:
