@@ -57,11 +57,13 @@
         "kind": "basic",
         "users": {
           "manager": {
+            "password": "manager",
             "roles": [
               "Manager"
             ]
           },
           "user": {
+            "password": "user",
             "roles": [
               "User"
             ]

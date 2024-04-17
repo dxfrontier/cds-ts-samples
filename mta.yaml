@@ -8,8 +8,8 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm ci
         - npm run fix
+        - npm ci
         - npm run build:production
         - npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models
 
