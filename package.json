@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@dxfrontier/cds-ts-dispatcher": "^2.0.9",
-    "@dxfrontier/cds-ts-repository": "^1.0.15",
+    "@dxfrontier/cds-ts-repository": "^1.0.16",
     "@sap/cds": "^7.8.1",
     "express": "^4.19.2",
     "@sap/xssec": "^3.6.1",
@@ -50,20 +50,15 @@
   },
   "cds": {
     "requires": {
-      "db": {
-        "kind": "sql"
-      },
       "auth": {
         "kind": "basic",
         "users": {
           "manager": {
-            "password": "manager",
             "roles": [
               "Manager"
             ]
           },
           "user": {
-            "password": "user",
             "roles": [
               "User"
             ]
