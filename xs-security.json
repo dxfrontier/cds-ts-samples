@@ -14,13 +14,17 @@
     {
       "name": "User",
       "description": "generated",
-      "scope-references": ["$XSAPPNAME.User"],
+      "scope-references": [
+        "$XSAPPNAME.User"
+      ],
       "attribute-references": []
     },
     {
       "name": "Manager",
       "description": "generated",
-      "scope-references": ["$XSAPPNAME.Manager"],
+      "scope-references": [
+        "$XSAPPNAME.Manager"
+      ],
       "attribute-references": []
     }
   ]
