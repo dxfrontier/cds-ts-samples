@@ -16,6 +16,26 @@ class BookService {
   @Inject(SRV) private readonly srv: Service;
   @Inject(BookRepository) private readonly bookRepository: BookRepository;
 
+  // PRIVATE routines
+
+  private async emitOrderedBookData(req: Request) {
+    await this.srv.emit('OrderedBook', { book: 'dada', quantity: 3, buyer: req.user.id });
+  }
+
+  private notifySingleInstance(req: Request, singleInstance: boolean) {
+    if (singleInstance) {
+      req.notify('Single instance');
+    } else {
+      req.notify('Entity set');
+    }
+  }
+
+  private enrichTitle(results: Book[]) {
+    results.map((book) => (book.title += ` -- 10 % discount!`));
+  }
+
+  // PUBLIC routines
+
   public async manageAfterReadMethods(args: { req: Request; results: Book[]; singleInstance: boolean }) {
     await this.emitOrderedBookData(args.req);
     this.notifySingleInstance(args.req, args.singleInstance);
@@ -26,24 +46,8 @@ class BookService {
     req.notify(`Item deleted : ${deleted}`);
   }
 
-  public async emitOrderedBookData(req: Request) {
-    await this.srv.emit('OrderedBook', { book: 'dada', quantity: 3, buyer: req.user.id });
-  }
-
   public showConsoleLog() {
     console.log('****************** Before read event');
-  }
-
-  public notifySingleInstance(req: Request, singleInstance: boolean) {
-    if (singleInstance) {
-      req.notify('Single instance');
-    } else {
-      req.notify('Entity set');
-    }
-  }
-
-  public enrichTitle(results: Book[]) {
-    results.map((book) => (book.title += ` -- 10 % discount!`));
   }
 
   public validateData(result: Book, req: Request) {
