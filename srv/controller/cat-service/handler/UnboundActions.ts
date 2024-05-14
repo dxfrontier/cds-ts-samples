@@ -21,7 +21,7 @@ import {
   OrderedBook,
   submitOrder,
   submitOrderFunction,
-} from '../../../../@cds-models/CatalogService';
+} from '#cds-models/CatalogService';
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 

@@ -14,7 +14,7 @@ import {
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { BookStat } from '../../../../@cds-models/CatalogService';
+import { BookStat } from '#cds-models/CatalogService';
 import AuthorService from '../../../service/AuthorService';
 import BookStatsService from '../../../service/BookStatsService';
 

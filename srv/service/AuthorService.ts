@@ -3,7 +3,7 @@ import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatche
 import BookRepository from '../repository/BookRepository';
 
 import type { ActionRequest } from '@dxfrontier/cds-ts-dispatcher';
-import type { BookStat } from '../../@cds-models/CatalogService';
+import type { BookStat } from '#cds-models/CatalogService';
 
 @ServiceLogic()
 class AuthorService {

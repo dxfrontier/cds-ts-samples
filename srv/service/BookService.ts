@@ -10,7 +10,7 @@ import {
 
 import BookRepository from '../repository/BookRepository';
 
-import type { Book, submitOrder } from '../../@cds-models/CatalogService';
+import type { Book, submitOrder } from '#cds-models/CatalogService';
 @ServiceLogic()
 class BookService {
   @Inject(SRV) private readonly srv: Service;

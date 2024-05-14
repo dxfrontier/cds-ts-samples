@@ -13,7 +13,7 @@ import {
   Validate,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { BookRecommendation } from '../../../../@cds-models/CatalogService';
+import { BookRecommendation } from '#cds-models/CatalogService';
 
 import type { TypedRequest, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
 

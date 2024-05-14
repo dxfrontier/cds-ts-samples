@@ -4,7 +4,7 @@ import BookRepository from '../repository/BookRepository';
 import BookStatsRepository from '../repository/BookStatsRepository';
 
 import type { ActionRequest, Request, Service, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
-import type { BookStat } from '../../@cds-models/CatalogService';
+import type { BookStat } from '#cds-models/CatalogService';
 
 @ServiceLogic()
 class BookStatsService {

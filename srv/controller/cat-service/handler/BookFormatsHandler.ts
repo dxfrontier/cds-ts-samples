@@ -15,7 +15,7 @@ import {
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { BookFormat } from '../../../../@cds-models/CatalogService';
+import { BookFormat } from '#cds-models/CatalogService';
 import { customFormatter } from '../../../util/formatter';
 
 import type { TypedRequest, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
