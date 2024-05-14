@@ -20,7 +20,7 @@ import {
   Use,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { Book } from '../../../../@cds-models/CatalogService';
+import { Book } from '#cds-models/CatalogService';
 import { MiddlewareMethodAfterRead1 } from '../../../middleware/MiddlewareAfterRead1';
 import { MiddlewareMethodAfterRead2 } from '../../../middleware/MiddlewareAfterRead2';
 import { MiddlewareMethodBeforeRead } from '../../../middleware/MiddlewareBeforeRead';

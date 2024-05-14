@@ -10,7 +10,7 @@ import {
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { UserActivityLog } from '../../../../@cds-models/AdminService';
+import { UserActivityLog } from '#cds-models/AdminService';
 
 import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 

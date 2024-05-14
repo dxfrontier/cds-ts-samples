@@ -2,7 +2,7 @@ import { Inject, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
 
 import type { Service, TypedRequest, Request } from '@dxfrontier/cds-ts-dispatcher';
 
-import type { Review } from '../../@cds-models/CatalogService';
+import type { Review } from '#cds-models/CatalogService';
 
 @ServiceLogic()
 class ReviewService {

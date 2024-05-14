@@ -16,7 +16,7 @@ import {
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { BookEvent } from '../../../../@cds-models/CatalogService';
+import { BookEvent } from '#cds-models/CatalogService';
 import BookEventsService from '../../../service/BookEventsService';
 
 import type { NextEvent } from '@dxfrontier/cds-ts-dispatcher';

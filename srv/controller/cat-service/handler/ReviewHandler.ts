@@ -12,7 +12,7 @@ import {
   SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { Review } from '../../../../@cds-models/CatalogService';
+import { Review } from '#cds-models/CatalogService';
 import ReviewService from '../../../service/ReviewService';
 
 import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
