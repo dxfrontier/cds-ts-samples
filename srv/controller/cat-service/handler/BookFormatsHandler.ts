@@ -3,6 +3,7 @@ import {
   AfterRead,
   BeforeCreate,
   BeforeUpdate,
+  CDS_DISPATCHER,
   EntityHandler,
   FieldsFormatter,
   Inject,
@@ -12,7 +13,6 @@ import {
   Req,
   Results,
   Service,
-  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
 import { BookFormat } from '#cds-models/CatalogService';
@@ -22,7 +22,7 @@ import type { TypedRequest, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookFormat)
 class BookFormatsHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   @BeforeCreate()
   @FieldsFormatter<BookFormat>({ action: 'blacklist', charsToRemove: 'le' }, 'format')

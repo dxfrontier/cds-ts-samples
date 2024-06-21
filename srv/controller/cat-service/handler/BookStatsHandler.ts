@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import {
+  CDS_DISPATCHER,
   EntityHandler,
   Inject,
   Next,
@@ -11,7 +12,6 @@ import {
   OnUpdate,
   Req,
   SingleInstanceSwitch,
-  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
 import { BookStat } from '#cds-models/CatalogService';
@@ -29,7 +29,7 @@ import type {
 
 @EntityHandler(BookStat)
 class BookStatsHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(BookStatsService) private readonly bookStatsService: BookStatsService;
   @Inject(AuthorService) private readonly authorService: AuthorService;
 

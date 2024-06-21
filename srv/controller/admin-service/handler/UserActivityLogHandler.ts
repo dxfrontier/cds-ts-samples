@@ -3,11 +3,11 @@ import {
   BeforeEditDraft,
   BeforeNewDraft,
   BeforeSaveDraft,
+  CDS_DISPATCHER,
   EntityHandler,
   Inject,
   Req,
   Service,
-  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
 import { UserActivityLog } from '#cds-models/AdminService';
@@ -16,7 +16,7 @@ import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(UserActivityLog)
 class UserActivityLogHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   @BeforeNewDraft()
   public async beforeNewDraft(@Req() req: TypedRequest<UserActivityLog>): Promise<void> {

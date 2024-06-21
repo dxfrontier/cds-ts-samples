@@ -2,6 +2,7 @@
 import {
   BeforeCreate,
   BeforeUpdate,
+  CDS_DISPATCHER,
   EntityHandler,
   Inject,
   Next,
@@ -9,7 +10,6 @@ import {
   OnUpdate,
   Req,
   Service,
-  SRV,
   Validate,
 } from '@dxfrontier/cds-ts-dispatcher';
 
@@ -19,7 +19,7 @@ import type { TypedRequest, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookRecommendation)
 class BookRecommendationsHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   @BeforeCreate()
   @Validate<BookRecommendation>({ action: 'isLowercase' }, 'comment')

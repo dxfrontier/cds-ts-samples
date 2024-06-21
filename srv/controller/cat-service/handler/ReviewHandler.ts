@@ -3,13 +3,13 @@ import {
   BeforeDelete,
   BeforeRead,
   BeforeUpdate,
+  CDS_DISPATCHER,
   EntityHandler,
   Inject,
   Req,
   Request,
   Service,
   SingleInstanceSwitch,
-  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
 import { Review } from '#cds-models/CatalogService';
@@ -19,7 +19,7 @@ import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Review)
 class ReviewHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(ReviewService) private readonly reviewService: ReviewService;
 
   @BeforeCreate()

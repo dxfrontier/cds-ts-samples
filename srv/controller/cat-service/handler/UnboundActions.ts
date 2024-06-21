@@ -1,4 +1,5 @@
 import {
+  CDS_DISPATCHER,
   Error,
   FieldsFormatter,
   Inject,
@@ -10,18 +11,12 @@ import {
   Req,
   Request,
   Service,
-  SRV,
   UnboundActions,
   Use,
   Validate,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import {
-  changeBookProperties,
-  OrderedBook,
-  submitOrder,
-  submitOrderFunction,
-} from '#cds-models/CatalogService';
+import { changeBookProperties, OrderedBook, submitOrder, submitOrderFunction } from '#cds-models/CatalogService';
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 
@@ -30,7 +25,7 @@ import type { ExposeFields, ActionReturn, ActionRequest, NextEvent, TypedRequest
 @UnboundActions()
 @Use(MiddlewareEntity1, MiddlewareEntity2)
 class UnboundActionsHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   @OnAction(changeBookProperties)
   @FieldsFormatter<ExposeFields<typeof changeBookProperties>>({ action: 'toLower' }, 'language')

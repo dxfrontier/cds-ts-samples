@@ -4,6 +4,7 @@ import {
   AfterCreate,
   AfterRead,
   BeforeRead,
+  CDS_DISPATCHER,
   EntityHandler,
   Inject,
   Req,
@@ -11,7 +12,6 @@ import {
   Results,
   Service,
   SingleInstanceSwitch,
-  SRV,
   Use,
 } from '@dxfrontier/cds-ts-dispatcher';
 
@@ -26,7 +26,7 @@ import BookService from '../../../service/BookService';
 @EntityHandler(BookOrder)
 @Use(MiddlewareEntity1, MiddlewareEntity2)
 class BookOrdersHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(BookService) private readonly bookService: BookService;
   @Inject(BookOrdersService) private readonly bookOrdersService: BookOrdersService;
 
