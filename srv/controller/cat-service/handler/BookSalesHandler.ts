@@ -3,6 +3,7 @@ import { BookSale } from '#cds-models/CatalogService';
 
 import {
   AfterRead,
+  CDS_DISPATCHER,
   EntityHandler,
   ExecutionAllowedForRole,
   GetQuery,
@@ -18,14 +19,13 @@ import {
   Results,
   Service,
   SingleInstanceSwitch,
-  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
 import BookSalesService from '../../../service/BookSalesService';
 
 @EntityHandler(BookSale)
 class BookSalesHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(BookSalesService) private readonly bookSalesService: BookSalesService;
 
   @AfterRead()

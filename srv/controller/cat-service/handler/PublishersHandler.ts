@@ -2,6 +2,7 @@ import { Publisher } from '#cds-models/CatalogService';
 
 import {
   AfterRead,
+  CDS_DISPATCHER,
   EntityHandler,
   Inject,
   Req,
@@ -9,14 +10,13 @@ import {
   Results,
   Service,
   SingleInstanceSwitch,
-  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
 import BookService from '../../../service/BookService';
 
 @EntityHandler(Publisher)
 class PublishersHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(BookService) private readonly bookService: BookService;
 
   @AfterRead()

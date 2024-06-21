@@ -6,19 +6,19 @@ import {
   AfterEditDraft,
   AfterNewDraft,
   AfterSaveDraft,
+  CDS_DISPATCHER,
   EntityHandler,
   Inject,
   Req,
   Result,
   Service,
-  SRV,
 } from '@dxfrontier/cds-ts-dispatcher';
 
 import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Promotion)
 class PromotionHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   @AfterNewDraft()
   public async afterNewDraft(@Result() result: Promotion, @Req() req: TypedRequest<Promotion>): Promise<void> {

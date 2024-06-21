@@ -1,22 +1,26 @@
 import {
+  AfterAll,
   AfterCreate,
   AfterDelete,
   AfterRead,
+  AfterReadEachInstance,
   AfterUpdate,
   BeforeRead,
+  CDS_DISPATCHER,
   EntityHandler,
   GetRequest,
   Inject,
   IsColumnSupplied,
   IsPresent,
   IsRole,
+  Prepend,
   Req,
   Request,
+  Res,
   Result,
   Results,
   Service,
   SingleInstanceSwitch,
-  SRV,
   Use,
 } from '@dxfrontier/cds-ts-dispatcher';
 
@@ -28,13 +32,47 @@ import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 import BookService from '../../../service/BookService';
 
-import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+import type { RequestResponse, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Book)
 @Use(MiddlewareEntity1, MiddlewareEntity2)
 class BookHandler {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(BookService) private readonly bookService: BookService;
+
+  @Prepend({ eventDecorator: 'AfterReadSingleInstance' })
+  public async prepend(@Req() req: Request): Promise<void> {
+    req.locale = 'DE_de';
+  }
+
+  @AfterReadEachInstance()
+  private async afterReadEachInstance(
+    @Req() req: Request,
+    @Res() res: RequestResponse,
+    @Result() result: Book,
+  ): Promise<void> {
+    //
+  }
+
+  @AfterAll()
+  private async afterAll(
+    @Req() req: Request,
+    @Res() res: RequestResponse,
+    @Result() result: Book | Book[] | boolean,
+  ): Promise<void> {
+    if (Array.isArray(result)) {
+      // when after `read` event was triggered
+      console.log('READ');
+    } else if (typeof result === 'boolean') {
+      // when after `delete` event was triggered
+      console.log('DELETE');
+    } else {
+      // when after `create`, `update` as triggered
+      console.log('CREATE and UPDATE');
+    }
+
+    res.setHeader('CustomHeader', 'AfterAllTriggered');
+  }
 
   @AfterCreate()
   private async afterCreate(@Result() result: Book, @Req() req: Request): Promise<void> {
