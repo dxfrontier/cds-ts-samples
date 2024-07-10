@@ -22,10 +22,10 @@ This Git samples repository was created as a reference on how to use the **[CDS-
 
 1. Ensure you have the latest LTS version of Node.js installed (see [Getting Started](https://cap.cloud.sap/docs/get-started/))
 
-2. Install [**@sap/cds-dk**](https://cap.cloud.sap/docs/get-started/) globally:
+2. Install [**@sap/cds-dk**](https://cap.cloud.sap/docs/get-started/), `typescript`, `ts-node` globally:
 
-```sh
-npm i -g @sap/cds-dk
+```bash
+npm install -g @sap/cds-dk typescript ts-node
 ```
 
 ## Download
