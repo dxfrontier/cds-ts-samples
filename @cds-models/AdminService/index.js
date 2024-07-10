@@ -2,11 +2,11 @@
 const cds = require('@sap/cds')
 const csn = cds.entities('AdminService')
 module.exports = { name: 'AdminService' }
-module.exports.UserActivityLog = csn.UserActivityLog
+module.exports.UserActivityLog = { is_singular: true, __proto__: csn.UserActivityLog }
 module.exports.UserActivityLog_ = csn.UserActivityLog
-module.exports.Promotion = csn.Promotions
+module.exports.Promotion = { is_singular: true, __proto__: csn.Promotions }
 module.exports.Promotions = csn.Promotions
-module.exports.User = csn.Users
+module.exports.User = { is_singular: true, __proto__: csn.Users }
 module.exports.Users = csn.Users
 // events
 // actions
