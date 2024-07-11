@@ -14,7 +14,7 @@
     "passport": "^0.7.0"
   },
   "devDependencies": {
-    "@cap-js/cds-typer": "^0.22.0",
+    "@cap-js/cds-typer": "^0.23.0",
     "@cap-js/sqlite": "^1.7.3",
     "@types/node": "^20.14.10",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
