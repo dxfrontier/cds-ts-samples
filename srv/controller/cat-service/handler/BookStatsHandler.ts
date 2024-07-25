@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import {
   CDS_DISPATCHER,
   EntityHandler,

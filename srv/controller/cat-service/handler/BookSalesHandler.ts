@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+ 
 import { BookSale } from '#cds-models/CatalogService';
 
 import {
