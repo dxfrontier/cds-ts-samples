@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
+ 
 import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
 
 @ServiceLogic()

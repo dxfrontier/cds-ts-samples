@@ -69,7 +69,7 @@ class BookService {
         return req.reject(400, `quantity has to be 1 or more`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+       
       if (!bookFound) {
         return req.error(404, `Book #${book} doesn't exist`);
       }

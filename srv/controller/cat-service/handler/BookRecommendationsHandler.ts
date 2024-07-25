@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-confusing-void-expression */
+ 
 import {
   BeforeCreate,
   BeforeUpdate,

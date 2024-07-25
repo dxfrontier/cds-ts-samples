@@ -35,7 +35,7 @@ class BookSalesService {
     if (args.locale !== '') {
       args.req.notify('locale');
     }
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+     
     if (args.columns && args.columns.length > 0) {
       args.req.notify('columns');
     }
