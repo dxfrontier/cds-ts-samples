@@ -14,6 +14,6 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['gen/', 'test/', 'mta_archives', '*.js', '@cds-models'],
+    ignores: ['gen/', 'test/', 'mta_archives/', '*.js', '@cds-models/'],
   },
 );
