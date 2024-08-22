@@ -13,6 +13,7 @@ import {
   IsColumnSupplied,
   IsPresent,
   IsRole,
+  Jwt,
   Prepend,
   Req,
   Request,

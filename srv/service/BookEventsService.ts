@@ -1,10 +1,10 @@
 import { BookEvent } from '#cds-models/CatalogService';
 
-import { Inject, Request, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+import { CDS_DISPATCHER, Inject, Request, Service, ServiceLogic } from '@dxfrontier/cds-ts-dispatcher';
 
 @ServiceLogic()
 class BookEventsService {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   public showNewDraftMessage(req: Request) {
     req.notify('On new draft');

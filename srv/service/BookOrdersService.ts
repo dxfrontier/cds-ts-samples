@@ -1,9 +1,8 @@
- 
-import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+import { CDS_DISPATCHER, Inject, Service, ServiceLogic } from '@dxfrontier/cds-ts-dispatcher';
 
 @ServiceLogic()
 class BookOrdersService {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   public showBeforeReadNotify() {
     console.log('****************** Before read event');

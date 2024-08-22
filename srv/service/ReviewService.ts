@@ -1,4 +1,4 @@
-import { Inject, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+import { Inject, ServiceLogic, CDS_DISPATCHER } from '@dxfrontier/cds-ts-dispatcher';
 
 import type { Service, TypedRequest, Request } from '@dxfrontier/cds-ts-dispatcher';
 
@@ -6,7 +6,7 @@ import type { Review } from '#cds-models/CatalogService';
 
 @ServiceLogic()
 class ReviewService {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   public validateComment(req: TypedRequest<Review>): void {
     if (req.data.comment != null && req.data.comment?.length > 10) {
