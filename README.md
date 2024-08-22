@@ -48,7 +48,7 @@ npm install
 ### Run server
 
 ```
-npm start
+npm run watch
 ```
 
 Open link in your browser: http://localhost:4004

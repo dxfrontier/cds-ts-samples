@@ -1,10 +1,10 @@
 import {
   ActionRequest,
+  CDS_DISPATCHER,
   Inject,
   Request,
   Service,
   ServiceLogic,
-  SRV,
   TypedRequest,
 } from '@dxfrontier/cds-ts-dispatcher';
 
@@ -13,7 +13,7 @@ import BookRepository from '../repository/BookRepository';
 import type { Book, submitOrder } from '#cds-models/CatalogService';
 @ServiceLogic()
 class BookService {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(BookRepository) private readonly bookRepository: BookRepository;
 
   // PRIVATE routines
@@ -69,7 +69,6 @@ class BookService {
         return req.reject(400, `quantity has to be 1 or more`);
       }
 
-       
       if (!bookFound) {
         return req.error(404, `Book #${book} doesn't exist`);
       }

@@ -1,17 +1,17 @@
-import { Inject, Service, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+import { Inject, Service, ServiceLogic, CDS_DISPATCHER } from '@dxfrontier/cds-ts-dispatcher';
 
 import type { GetQueryType, Request } from '@dxfrontier/cds-ts-dispatcher';
 
 @ServiceLogic()
 class BookSalesService {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
   public showAfterReadNotifies(args: {
     req: Request;
     hasRoles: boolean;
     isRole: boolean;
     isSingleInstance: boolean;
-    token: string | undefined;
+    // token: string | undefined;
     locale: string;
     columns: GetQueryType['columns']['forSelect'] | undefined;
     orderBy: GetQueryType['orderBy'];
@@ -29,13 +29,13 @@ class BookSalesService {
     } else {
       args.req.notify('Entity set');
     }
-    if (args.token != null) {
-      args.req.notify(args.token);
-    }
+    // if (args.token != null) {
+    //   args.req.notify(args.token);
+    // }
     if (args.locale !== '') {
       args.req.notify('locale');
     }
-     
+
     if (args.columns && args.columns.length > 0) {
       args.req.notify('columns');
     }

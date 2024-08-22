@@ -1,4 +1,4 @@
-import { Inject, ServiceLogic, SRV } from '@dxfrontier/cds-ts-dispatcher';
+import { Inject, ServiceLogic, CDS_DISPATCHER } from '@dxfrontier/cds-ts-dispatcher';
 
 import BookRepository from '../repository/BookRepository';
 import BookStatsRepository from '../repository/BookStatsRepository';
@@ -8,7 +8,7 @@ import type { BookStat } from '#cds-models/CatalogService';
 
 @ServiceLogic()
 class BookStatsService {
-  @Inject(SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
   @Inject(BookStatsRepository) private readonly bookStatsRepository: BookStatsRepository;
   @Inject(BookRepository) private readonly bookRepository: BookRepository;
 

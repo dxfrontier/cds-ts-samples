@@ -1,4 +1,3 @@
- 
 import { BookSale } from '#cds-models/CatalogService';
 
 import {
@@ -49,15 +48,13 @@ class BookSalesHandler {
     @GetRequest('locale') locale: Request['locale'],
 
     @SingleInstanceSwitch() isSingleInstance: boolean,
-
-    @Jwt() token: string | undefined,
   ): Promise<void> {
     this.bookSalesService.showAfterReadNotifies({
       req,
       hasRoles,
       isRole,
       isSingleInstance,
-      token,
+      // token,
       locale,
       columns,
       orderBy,
