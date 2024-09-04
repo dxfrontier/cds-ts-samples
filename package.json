@@ -5,31 +5,7 @@
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
-  "dependencies": {
-    "@dxfrontier/cds-ts-dispatcher": "^3.0.0",
-    "@dxfrontier/cds-ts-repository": "^2.0.0",
-    "@sap/cds": "^8.1.1",
-    "@sap/cds-dk": "^8.1.2",
-    "@sap/xssec": "^4.2.1",
-    "express": "^4.19.2",
-    "passport": "^0.7.0"
-  },
-  "devDependencies": {
-    "@cap-js/cds-typer": "^0.25.0",
-    "@cap-js/cds-types": "^0.6.5",
-    "@cap-js/sqlite": "^1.7.3",
-    "@eslint/js": "^10.0.0",
-    "@sap/cds-lsp": "^8.0.0",
-    "@types/node": "^22.5.0",
-    "eslint": "^9.9.0",
-    "globals": "^15.9.0",
-    "npm-run-all": "^4.1.5",
-    "prettier": "3.3.3",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0"
-  },
-  "scripts": {
+   "scripts": {
     "start": "cds-serve",
     "watch": "cds-ts w",
     "eslint:message": "echo 'ESLint started ...'",
@@ -46,6 +22,30 @@
     "build:ts": "echo 'Step 2: Transpile TS => JS' && tsc",
     "build:srv:clean:ts": "echo 'Step 3: Clean TS files from srv folder' && find gen/srv/srv -type f -name '*.ts' -delete",
     "build:production": "run-s build:cds build:ts build:srv:clean:ts"
+  },
+  "dependencies": {
+    "@dxfrontier/cds-ts-dispatcher": "^3.0.0",
+    "@dxfrontier/cds-ts-repository": "^2.0.4",
+    "@sap/cds": "^8.2.0",
+    "@sap/cds-dk": "^8.2.0",
+    "@sap/xssec": "^4.2.3",
+    "express": "^4.19.2",
+    "passport": "^0.7.0"
+  },
+  "devDependencies": {
+    "@cap-js/cds-typer": "^0.25.0",
+    "@cap-js/cds-types": "^0.6.5",
+    "@cap-js/sqlite": "^1.7.3",
+    "@eslint/js": "^10.0.0",
+    "@sap/cds-lsp": "^8.2.1",
+    "@types/node": "^22.5.3",
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.4.0"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
