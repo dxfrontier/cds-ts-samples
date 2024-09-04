@@ -18,10 +18,13 @@
     "format-cds": "format-cds",
     "check": "run-s eslint:message eslint prettier:message prettier",
     "fix": "run-s eslint:message eslint:fix prettier:message prettier:fix format-cds:message format-cds",
-    "build:cds": "echo 'Step 1: Build CDS' && cds build --production",
-    "build:ts": "echo 'Step 2: Transpile TS => JS' && tsc",
-    "build:srv:clean:ts": "echo 'Step 3: Clean TS files from srv folder' && find gen/srv/srv -type f -name '*.ts' -delete",
-    "build:production": "run-s build:cds build:ts build:srv:clean:ts"
+    "build:cds": "cds build --production",
+    "build:cds:message": "echo 'Build CDS ...'",
+    "build:ts": "tsc",
+    "build:ts:message": "echo 'Transpile TS => JS ...'",
+    "build:srv:clean:ts": "find gen/srv/srv -type f -name '*.ts' -delete",
+    "build:srv:clean:ts:message": "echo 'Clean TS files from srv folder ...'",
+    "build": "run-s build:cds:message build:cds build:ts:message build:ts build:srv:clean:ts:message build:srv:clean:ts"
   },
   "dependencies": {
     "@dxfrontier/cds-ts-dispatcher": "^3.0.0",
