@@ -4,27 +4,27 @@ import * as __ from './../../../_';
 import * as _sap_common from './../../common';
 export function _BookAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Book extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare title?: string | null;
-        declare descr?: string | null;
-        declare stock?: number | null;
-        declare price?: number | null;
+    declare ID?: number
+    declare title?: string | null
+    declare descr?: string | null
+    declare stock?: number | null
+    declare price?: number | null
     /**
     * Type for an association to Currencies
     * 
     * See https://cap.cloud.sap/docs/cds/common#type-currency
     */
-        declare currency?: _.Currency | null;
-        declare currency_code?: string | null;
-        declare image?: Buffer | string | {value: import("stream").Readable, $mediaContentType: string, $mediaContentDispositionFilename?: string, $mediaContentDispositionType?: string} | null;
-        declare author?: __.Association.to<Author> | null;
-        declare author_ID?: number | null;
-        declare genre?: __.Association.to<Genre> | null;
-        declare genre_ID?: number | null;
-        declare reviews?: __.Association.to.many<Reviews>;
-        declare stats?: __.Association.to<BookStat> | null;
-        declare bookFormats?: __.Association.to.many<BookFormats>;
-        declare bookRecomanddations?: __.Association.to.many<BookRecommendations>;
+    declare currency?: _.Currency | null
+    declare currency_code?: string | null
+    declare image?: Buffer | string | {value: import("stream").Readable, $mediaContentType: string, $mediaContentDispositionFilename?: string, $mediaContentDispositionType?: string} | null
+    declare author?: __.Association.to<Author> | null
+    declare author_ID?: number | null
+    declare genre?: __.Association.to<Genre> | null
+    declare genre_ID?: number | null
+    declare reviews?: __.Association.to.many<Reviews>
+    declare stats?: __.Association.to<BookStat> | null
+    declare bookFormats?: __.Association.to.many<BookFormats>
+    declare bookRecomanddations?: __.Association.to.many<BookRecommendations>
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -36,8 +36,8 @@ Object.defineProperty(Books, 'name', { value: 'sap.capire.bookshop.Books' })
 
 export function _PublisherAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Publisher extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare name?: string | null;
+    declare ID?: number
+    declare name?: string | null
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -49,11 +49,11 @@ Object.defineProperty(Publishers, 'name', { value: 'sap.capire.bookshop.Publishe
 
 export function _BookStatAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookStat extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare views?: number | null;
-        declare averageRating?: number | null;
-        declare book?: __.Association.to<Book> | null;
-        declare book_ID?: number | null;
+    declare ID?: number
+    declare views?: number | null
+    declare averageRating?: number | null
+    declare book?: __.Association.to<Book> | null
+    declare book_ID?: number | null
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -65,13 +65,13 @@ Object.defineProperty(BookStats, 'name', { value: 'sap.capire.bookshop.BookStats
 
 export function _AuthorAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Author extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare name?: string | null;
-        declare dateOfBirth?: __.CdsDate | null;
-        declare dateOfDeath?: __.CdsDate | null;
-        declare placeOfBirth?: string | null;
-        declare placeOfDeath?: string | null;
-        declare books?: __.Association.to.many<Books>;
+    declare ID?: number
+    declare name?: string | null
+    declare dateOfBirth?: __.CdsDate | null
+    declare dateOfDeath?: __.CdsDate | null
+    declare placeOfBirth?: string | null
+    declare placeOfDeath?: string | null
+    declare books?: __.Association.to.many<Books>
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -83,10 +83,10 @@ Object.defineProperty(Authors, 'name', { value: 'sap.capire.bookshop.Authors' })
 
 export function _GenreAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Genre extends _sap_common._CodeListAspect(Base) {
-        declare ID?: number;
-        declare parent?: __.Association.to<Genre> | null;
-        declare parent_ID?: number | null;
-        declare children?: __.Composition.of.many<Genres>;
+    declare ID?: number
+    declare parent?: __.Association.to<Genre> | null
+    declare parent_ID?: number | null
+    declare children?: __.Composition.of.many<Genres>
       declare static readonly actions: typeof _sap_common.CodeList.actions & Record<never, never>
   };
 }
@@ -98,13 +98,13 @@ Object.defineProperty(Genres, 'name', { value: 'sap.capire.bookshop.Genres' })
 
 export function _ReviewAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Review extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare book?: __.Association.to<Book> | null;
-        declare book_ID?: number | null;
-        declare reviewer?: __.Association.to<User> | null;
-        declare reviewer_ID?: number | null;
-        declare rating?: number | null;
-        declare comment?: string | null;
+    declare ID?: number
+    declare book?: __.Association.to<Book> | null
+    declare book_ID?: number | null
+    declare reviewer?: __.Association.to<User> | null
+    declare reviewer_ID?: number | null
+    declare rating?: number | null
+    declare comment?: string | null
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -116,8 +116,8 @@ Object.defineProperty(Reviews, 'name', { value: 'sap.capire.bookshop.Reviews' })
 
 export function _BookEventAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookEvent extends _._managedAspect(_._cuidAspect(Base)) {
-        declare name?: string | null;
-        declare types?: _.BookTypes | null;
+    declare name?: string | null
+    declare types?: _.BookTypes | null
       declare static readonly actions: typeof _.cuid.actions & typeof _.managed.actions & Record<never, never>
   };
 }
@@ -130,13 +130,13 @@ Object.defineProperty(BookEvents, 'name', { value: 'sap.capire.bookshop.BookEven
 
 export function _BookSaleAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookSale extends _._managedAspect(_._cuidAspect(Base)) {
-        declare saleDate?: __.CdsDate | null;
-        declare saleAmount?: number | null;
-        declare quantity?: number | null;
-        declare book?: __.Association.to<Book> | null;
-        declare book_ID?: number | null;
-        declare customer?: __.Association.to<User> | null;
-        declare customer_ID?: number | null;
+    declare saleDate?: __.CdsDate | null
+    declare saleAmount?: number | null
+    declare quantity?: number | null
+    declare book?: __.Association.to<Book> | null
+    declare book_ID?: number | null
+    declare customer?: __.Association.to<User> | null
+    declare customer_ID?: number | null
       declare static readonly actions: typeof _.cuid.actions & typeof _.managed.actions & Record<never, never>
   };
 }
@@ -148,11 +148,11 @@ Object.defineProperty(BookSales, 'name', { value: 'sap.capire.bookshop.BookSales
 
 export function _UserAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class User extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare username?: string | null;
-        declare email?: string | null;
-        declare role?: _.Roles | null;
-        declare reviews?: __.Association.to.many<Reviews>;
+    declare ID?: number
+    declare username?: string | null
+    declare email?: string | null
+    declare role?: _.Roles | null
+    declare reviews?: __.Association.to.many<Reviews>
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -164,8 +164,8 @@ Object.defineProperty(Users, 'name', { value: 'sap.capire.bookshop.Users' })
 
 export function _UserActivityLogAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class UserActivityLog extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare actionType?: string | null;
+    declare ID?: number
+    declare actionType?: string | null
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -178,13 +178,13 @@ Object.defineProperty(UserActivityLog_, 'name', { value: 'sap.capire.bookshop.Us
 
 export function _PromotionAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Promotion extends Base {
-        declare ID?: number;
-        declare name?: string | null;
-        declare description?: string | null;
-        declare startDate?: __.CdsDate | null;
-        declare endDate?: __.CdsDate | null;
-        declare discount?: number | null;
-        declare books?: __.Association.to.many<Books>;
+    declare ID?: number
+    declare name?: string | null
+    declare description?: string | null
+    declare startDate?: __.CdsDate | null
+    declare endDate?: __.CdsDate | null
+    declare discount?: number | null
+    declare books?: __.Association.to.many<Books>
       declare static readonly actions: Record<never, never>
   };
 }
@@ -197,13 +197,13 @@ Object.defineProperty(Promotions, 'name', { value: 'sap.capire.bookshop.Promotio
 
 export function _BookOrderAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookOrder extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare orderNumber?: string | null;
-        declare orderDate?: __.CdsDate | null;
-        declare totalAmount?: number | null;
-        declare status?: string | null;
-        declare customer?: __.Association.to<User> | null;
-        declare customer_ID?: number | null;
+    declare ID?: number
+    declare orderNumber?: string | null
+    declare orderDate?: __.CdsDate | null
+    declare totalAmount?: number | null
+    declare status?: string | null
+    declare customer?: __.Association.to<User> | null
+    declare customer_ID?: number | null
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -215,14 +215,14 @@ Object.defineProperty(BookOrders, 'name', { value: 'sap.capire.bookshop.BookOrde
 
 export function _BookRecommendationAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookRecommendation extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare rating?: number | null;
-        declare comment?: string | null;
-        declare description?: string | null;
-        declare book?: __.Association.to<Book> | null;
-        declare book_ID?: number | null;
-        declare recommended?: __.Association.to<Book> | null;
-        declare recommended_ID?: number | null;
+    declare ID?: number
+    declare rating?: number | null
+    declare comment?: string | null
+    declare description?: string | null
+    declare book?: __.Association.to<Book> | null
+    declare book_ID?: number | null
+    declare recommended?: __.Association.to<Book> | null
+    declare recommended_ID?: number | null
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }
@@ -234,14 +234,14 @@ Object.defineProperty(BookRecommendations, 'name', { value: 'sap.capire.bookshop
 
 export function _BookFormatAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class BookFormat extends _._managedAspect(Base) {
-        declare ID?: number;
-        declare format?: string | null;
-        declare price?: number | null;
-        declare pages?: number | null;
-        declare language?: string | null;
-        declare publicationDate?: __.CdsDate | null;
-        declare book?: __.Association.to<Book> | null;
-        declare book_ID?: number | null;
+    declare ID?: number
+    declare format?: string | null
+    declare price?: number | null
+    declare pages?: number | null
+    declare language?: string | null
+    declare publicationDate?: __.CdsDate | null
+    declare book?: __.Association.to<Book> | null
+    declare book_ID?: number | null
       declare static readonly actions: typeof _.managed.actions & Record<never, never>
   };
 }

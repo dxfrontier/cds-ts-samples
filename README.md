@@ -33,8 +33,8 @@ npm install -g @sap/cds-dk typescript ts-node
 If you have [Git](https://git-scm.com/downloads) installed, clone this repo as shown below.
 
 ```bash
-git clone https://github.com/dxfrontier/cds-ts-samples.git cds-ts-dispatcher-samples
-cd cds-ts-dispatcher-samples
+git clone https://github.com/dxfrontier/cds-ts-samples.git
+cd cds-ts-samples
 ```
 
 ### Setup
@@ -76,16 +76,14 @@ Will run the builder from `mta.yaml` which has the following npm commands :
 - builder: custom
   commands:
     - npm ci
-    - npm run fix
-    - npm run build:production
+    - npm run build
     - npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models
 ```
 
 `Steps` explained :
 
 - `npm ci` - Will do a clean install.
-- `npm run fix` - Will run the ESLint and Prettier.
-- `npm run build:production` - will run the package.json script command for CDS build and transpilation of TS to JS and clean the `TS files`.
+- `npm run build` - will run the package.json script command for CDS build and transpilation of TS to JS and clean the `TS files`.
 - `npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models` - will make sure the @cds-models are generated.
 
 ## Contributing

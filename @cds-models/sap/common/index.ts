@@ -4,8 +4,8 @@ export type Locale = string;
 // the following represents the CDS aspect 'CodeList'
 export function _CodeListAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class CodeList extends Base {
-        declare name?: string | null;
-        declare descr?: string | null;
+    declare name?: string | null
+    declare descr?: string | null
       declare static readonly actions: Record<never, never>
   };
 }
@@ -16,7 +16,7 @@ export function _TextsAspectAspect<TBase extends new (...args: any[]) => object>
     /**
     * Type for a language code
     */
-        declare locale?: Locale;
+    declare locale?: Locale
       declare static readonly actions: Record<never, never>
   };
 }
@@ -31,7 +31,7 @@ export function _LanguageAspect<TBase extends new (...args: any[]) => object>(Ba
     /**
     * Type for a language code
     */
-        declare code?: Locale;
+    declare code?: Locale
       declare static readonly actions: typeof CodeList.actions & Record<never, never>
   };
 }
@@ -48,7 +48,7 @@ Object.defineProperty(Languages, 'name', { value: 'sap.common.Languages' })
 */
 export function _CountryAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Country extends _CodeListAspect(Base) {
-        declare code?: string;
+    declare code?: string
       declare static readonly actions: typeof CodeList.actions & Record<never, never>
   };
 }
@@ -65,9 +65,9 @@ Object.defineProperty(Countries, 'name', { value: 'sap.common.Countries' })
 */
 export function _CurrencyAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Currency extends _CodeListAspect(Base) {
-        declare code?: string;
-        declare symbol?: string | null;
-        declare minorUnit?: number | null;
+    declare code?: string
+    declare symbol?: string | null
+    declare minorUnit?: number | null
       declare static readonly actions: typeof CodeList.actions & Record<never, never>
   };
 }
@@ -84,7 +84,7 @@ Object.defineProperty(Currencies, 'name', { value: 'sap.common.Currencies' })
 */
 export function _TimezoneAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Timezone extends _CodeListAspect(Base) {
-        declare code?: string;
+    declare code?: string
       declare static readonly actions: typeof CodeList.actions & Record<never, never>
   };
 }
