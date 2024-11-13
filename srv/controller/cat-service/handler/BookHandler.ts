@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   AfterAll,
   AfterCreate,
@@ -8,12 +9,14 @@ import {
   BeforeRead,
   CDS_DISPATCHER,
   EntityHandler,
+  Env,
+  // Env,
   GetRequest,
   Inject,
   IsColumnSupplied,
   IsPresent,
   IsRole,
-  Jwt,
+  // Jwt,
   Prepend,
   Req,
   Request,
@@ -32,6 +35,9 @@ import { MiddlewareMethodBeforeRead } from '../../../middleware/MiddlewareBefore
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 import BookService from '../../../service/BookService';
+import { CDS_ENV } from '#dispatcher';
+
+import cds from '@sap/cds';
 
 import type { RequestResponse, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
 
@@ -96,8 +102,9 @@ class BookHandler {
     @IsPresent('SELECT', 'columns') hasColumns: boolean,
     @IsRole('Developer', 'AnotherRole') role: boolean,
     @GetRequest('locale') locale: Request['locale'],
+    @Env<CDS_ENV>('requires.auth.users') users: any[],
   ): Promise<void> {
-    await this.bookService.manageAfterReadMethods({ req, results, singleInstance });
+    await this.bookService.manageAfterReadMethods({ req, results, singleInstance, users });
   }
 
   @AfterUpdate()

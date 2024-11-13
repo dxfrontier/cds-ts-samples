@@ -9,7 +9,7 @@ build-parameters:
     - builder: custom
       commands:
         - npm ci
-        - npm run build:production
+        - npm run build
         - npx @cap-js/cds-typer "*" --outputDirectory gen/srv/@cds-models
 
 modules:

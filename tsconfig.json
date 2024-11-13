@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowJs": true,
@@ -10,23 +9,22 @@
     "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-
-    /* Strictness */
     "strict": true,
-
-    /* Decorators */
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
     "target": "ES2021",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-
     "outDir": "./gen/srv",
-
+    "rootDir": ".",
     "paths": {
-      "#cds-models/*": ["./@cds-models/*/index.ts"]
+      "#cds-models/*": [
+        "./@cds-models/*/index.ts"
+      ]
     }
   },
-  "include": ["./srv"]
+  "include": [
+    "./srv",
+    "./@dispatcher"
+  ]
 }

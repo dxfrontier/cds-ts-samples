@@ -36,7 +36,7 @@ class BookService {
 
   // PUBLIC routines
 
-  public async manageAfterReadMethods(args: { req: Request; results: Book[]; singleInstance: boolean }) {
+  public async manageAfterReadMethods(args: { req: Request; results: Book[]; singleInstance: boolean; users: any[] }) {
     await this.emitOrderedBookData(args.req);
     this.notifySingleInstance(args.req, args.singleInstance);
     this.enrichTitle(args.results);
