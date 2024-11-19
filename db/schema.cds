@@ -28,6 +28,7 @@ entity Books : managed {
       // Associations
       author              : Association to Authors @mandatory;
       genre               : Association to Genres;
+      promotion           : Association to Promotions;
 
       reviews             : Association to many Reviews
                               on reviews.book = $self;
@@ -132,7 +133,8 @@ entity Promotions {
       startDate   : Date        @mandatory;
       endDate     : Date        @mandatory;
       discount    : Decimal     @mandatory;
-      books       : Association to many Books;
+      books       : Association to many Books
+                      on books.promotion = $self;
 }
 
 entity BookOrders : managed {

@@ -3,7 +3,7 @@ using {sap.capire.bookshop as Base} from '../../../db/schema';
 service CatalogService {
 
   entity Books               as projection on Base.Books;
-  entity Authors             as projection on Base.Authors
+  entity Authors             as projection on Base.Authors;
   entity Reviews             as projection on Base.Reviews;
   entity Publishers          as projection on Base.Publishers;
   entity BookOrders          as projection on Base.BookOrders;
