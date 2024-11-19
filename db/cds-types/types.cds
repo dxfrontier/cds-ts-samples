@@ -15,5 +15,5 @@ type Roles     : String enum {
 type BookTypes : String enum {
   BOOK_SIGNING;
   AUTHOR_TALK;
-  BOOK_LUNCH
+  BOOK_LUNCH;
 }
