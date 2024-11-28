@@ -37,6 +37,8 @@ export function _BookAspect<TBase extends new (...args: any[]) => object>(Base: 
     declare author_ID?: __.Key<number> | null
     declare genre?: __.Association.to<Genre> | null
     declare genre_ID?: __.Key<number> | null
+    declare promotion?: __.Association.to<_sap_capire_bookshop.Promotion> | null
+    declare promotion_ID?: __.Key<number> | null
     declare reviews?: __.Association.to.many<Reviews>
     declare stats?: __.Association.to<BookStat> | null
     declare bookFormats?: __.Association.to.many<BookFormats>
