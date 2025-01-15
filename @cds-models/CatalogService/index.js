@@ -41,6 +41,15 @@ module.exports.Currencies = csn.Currencies
 // Genres
 module.exports.Genre = { is_singular: true, __proto__: csn.Genres }
 module.exports.Genres = csn.Genres
+// Books.texts
+module.exports.Books.text = { is_singular: true, __proto__: csn['Books.texts'] }
+module.exports.Books.texts = csn['Books.texts']
+// Currencies.texts
+module.exports.Currencies.text = { is_singular: true, __proto__: csn['Currencies.texts'] }
+module.exports.Currencies.texts = csn['Currencies.texts']
+// Genres.texts
+module.exports.Genres.text = { is_singular: true, __proto__: csn['Genres.texts'] }
+module.exports.Genres.texts = csn['Genres.texts']
 // events
 module.exports.OrderedBook = 'CatalogService.OrderedBook'
 // actions

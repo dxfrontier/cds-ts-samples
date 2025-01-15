@@ -43,6 +43,12 @@ module.exports.BookRecommendations = csn.BookRecommendations
 // BookFormats
 module.exports.BookFormat = { is_singular: true, __proto__: csn.BookFormats }
 module.exports.BookFormats = csn.BookFormats
+// Books.texts
+module.exports.Books.text = { is_singular: true, __proto__: csn['Books.texts'] }
+module.exports.Books.texts = csn['Books.texts']
+// Genres.texts
+module.exports.Genres.text = { is_singular: true, __proto__: csn['Genres.texts'] }
+module.exports.Genres.texts = csn['Genres.texts']
 // events
 // actions
 // enums
