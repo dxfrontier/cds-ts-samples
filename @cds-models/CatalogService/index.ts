@@ -1,16 +1,14 @@
 // This is an automatically generated file. Please do not change its contents manually!
-import cds from '@sap/cds'
 import * as _ from './..';
 import * as __ from './../_';
 import * as _sap_capire_bookshop from './../sap/capire/bookshop';
 import * as _sap_common from './../sap/common';
 
-export class CatalogService extends cds.Service {
-  declare changeBookProperties: typeof changeBookProperties
-  declare submitOrder: typeof submitOrder
-  declare submitOrderFunction: typeof submitOrderFunction
+export default class {
+  declare static readonly changeBookProperties: typeof changeBookProperties;
+  declare static readonly submitOrder: typeof submitOrder;
+  declare static readonly submitOrderFunction: typeof submitOrderFunction;
 }
-export default CatalogService
 
 export function _BookAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Book extends Base {
