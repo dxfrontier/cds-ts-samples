@@ -19,7 +19,6 @@ import {
   // Jwt,
   Prepend,
   Req,
-  Request,
   Res,
   Result,
   Results,
@@ -37,9 +36,7 @@ import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 import BookService from '../../../service/BookService';
 import { CDS_ENV } from '#dispatcher';
 
-import cds from '@sap/cds';
-
-import type { RequestResponse, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+import type { RequestResponse, Request } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Book)
 @Use(MiddlewareEntity1, MiddlewareEntity2)
@@ -88,7 +85,7 @@ class BookHandler {
 
   @BeforeRead()
   @Use(MiddlewareMethodBeforeRead)
-  private async beforeRead(@Req() req: TypedRequest<Book>): Promise<void> {
+  private async beforeRead(@Req() req: Request<Book>): Promise<void> {
     this.bookService.showConsoleLog();
   }
 
@@ -108,7 +105,7 @@ class BookHandler {
   }
 
   @AfterUpdate()
-  private async afterUpdate(@Result() result: Book, @Req() req: TypedRequest<Book>): Promise<void> {
+  private async afterUpdate(@Result() result: Book, @Req() req: Request<Book>): Promise<void> {
     await this.bookService.addDefaultTitleText(result, req);
   }
 

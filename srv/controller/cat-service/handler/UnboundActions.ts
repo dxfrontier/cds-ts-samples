@@ -9,7 +9,6 @@ import {
   OnEvent,
   OnFunction,
   Req,
-  Request,
   Service,
   UnboundActions,
   Use,
@@ -20,7 +19,7 @@ import { changeBookProperties, OrderedBook, submitOrder, submitOrderFunction } f
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 
-import type { ExposeFields, ActionReturn, ActionRequest, NextEvent, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+import type { ExposeFields, ActionReturn, ActionRequest, NextEvent, Request } from '@dxfrontier/cds-ts-dispatcher';
 
 @UnboundActions()
 @Use(MiddlewareEntity1, MiddlewareEntity2)
@@ -62,7 +61,7 @@ class UnboundActionsHandler {
   }
 
   @OnEvent(OrderedBook)
-  public async orderedBook(req: TypedRequest<OrderedBook>) {
+  public async orderedBook(req: Request<OrderedBook>) {
     if (req.event !== 'OrderedBook') {
       req.reject(400, 'Not OrderedBook: check @OnEvent decorator');
     }

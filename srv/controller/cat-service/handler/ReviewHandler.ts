@@ -7,7 +7,6 @@ import {
   EntityHandler,
   Inject,
   Req,
-  Request,
   Service,
   SingleInstanceSwitch,
 } from '@dxfrontier/cds-ts-dispatcher';
@@ -15,7 +14,7 @@ import {
 import { Review } from '#cds-models/CatalogService';
 import ReviewService from '../../../service/ReviewService';
 
-import type { TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+import type { Request } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(Review)
 class ReviewHandler {
@@ -23,17 +22,17 @@ class ReviewHandler {
   @Inject(ReviewService) private readonly reviewService: ReviewService;
 
   @BeforeCreate()
-  private async beforeCreate(@Req() req: TypedRequest<Review>) {
+  private async beforeCreate(@Req() req: Request<Review>) {
     this.reviewService.validateComment(req);
   }
 
   @BeforeRead()
-  private async beforeRead(@Req() req: TypedRequest<Review>, @SingleInstanceSwitch() isSingleInstance: boolean) {
+  private async beforeRead(@Req() req: Request<Review>, @SingleInstanceSwitch() isSingleInstance: boolean) {
     this.reviewService.notifyRead(req);
   }
 
   @BeforeUpdate()
-  private async beforeUpdate(@Req() req: TypedRequest<Review>) {
+  private async beforeUpdate(@Req() req: Request<Review>) {
     this.reviewService.validateComment(req);
   }
 

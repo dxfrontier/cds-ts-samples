@@ -17,14 +17,7 @@ import { BookStat } from '#cds-models/CatalogService';
 import AuthorService from '../../../service/AuthorService';
 import BookStatsService from '../../../service/BookStatsService';
 
-import type {
-  TypedRequest,
-  Service,
-  Request,
-  ActionRequest,
-  ActionReturn,
-  NextEvent,
-} from '@dxfrontier/cds-ts-dispatcher';
+import type { Request, Service, ActionRequest, ActionReturn, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookStat)
 class BookStatsHandler {
@@ -33,14 +26,14 @@ class BookStatsHandler {
   @Inject(AuthorService) private readonly authorService: AuthorService;
 
   @OnCreate()
-  public async create(@Req() req: TypedRequest<BookStat>, @Next() next: NextEvent) {
+  public async create(@Req() req: Request<BookStat>, @Next() next: NextEvent) {
     this.bookStatsService.notifyCreated(req);
     return next();
   }
 
   @OnRead()
   public async read(
-    @Req() req: TypedRequest<BookStat>,
+    @Req() req: Request<BookStat>,
     @Next() next: NextEvent,
     @SingleInstanceSwitch() isSingleInstance: boolean,
   ) {
@@ -52,7 +45,7 @@ class BookStatsHandler {
   }
 
   @OnUpdate()
-  public async update(@Req() req: TypedRequest<BookStat>, @Next() next: NextEvent) {
+  public async update(@Req() req: Request<BookStat>, @Next() next: NextEvent) {
     this.bookStatsService.notifyUpdated(req);
     return next();
   }

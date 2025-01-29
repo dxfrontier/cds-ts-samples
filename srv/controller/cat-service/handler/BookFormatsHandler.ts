@@ -1,4 +1,3 @@
- 
 import {
   AfterRead,
   BeforeCreate,
@@ -18,7 +17,7 @@ import {
 import { BookFormat } from '#cds-models/CatalogService';
 import { customFormatter } from '../../../util/formatter';
 
-import type { TypedRequest, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
+import type { Request, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookFormat)
 class BookFormatsHandler {
@@ -26,32 +25,32 @@ class BookFormatsHandler {
 
   @BeforeCreate()
   @FieldsFormatter<BookFormat>({ action: 'blacklist', charsToRemove: 'le' }, 'format')
-  public async beforeCreate(@Req() req: TypedRequest<BookFormat>): Promise<void> {
+  public async beforeCreate(@Req() req: Request<BookFormat>): Promise<void> {
     // ...
   }
 
   @BeforeUpdate()
   @FieldsFormatter<BookFormat>({ action: 'truncate', options: { length: 7 } }, 'format')
-  public async beforeUpdate(@Req() req: TypedRequest<BookFormat>): Promise<void> {
+  public async beforeUpdate(@Req() req: Request<BookFormat>): Promise<void> {
     // ...
   }
 
   @AfterRead()
   @FieldsFormatter<BookFormat>({ action: 'toUpper' }, 'format')
   @FieldsFormatter<BookFormat>(customFormatter, 'format')
-  public async afterRead(@Results() results: BookFormat[], @Req() req: TypedRequest<BookFormat>) {
+  public async afterRead(@Results() results: BookFormat[], @Req() req: Request<BookFormat>) {
     // ...
   }
 
   @OnCreate()
   @FieldsFormatter<BookFormat>({ action: 'ltrim' }, 'language')
-  public async create(@Req() req: TypedRequest<BookFormat>, @Next() next: NextEvent) {
+  public async create(@Req() req: Request<BookFormat>, @Next() next: NextEvent) {
     return next();
   }
 
   @OnUpdate()
   @FieldsFormatter<BookFormat>({ action: 'trim' }, 'format')
-  public async update(@Req() req: TypedRequest<BookFormat>, @Next() next: NextEvent) {
+  public async update(@Req() req: Request<BookFormat>, @Next() next: NextEvent) {
     return next();
   }
 }

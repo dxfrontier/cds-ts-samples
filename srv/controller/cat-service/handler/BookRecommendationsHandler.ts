@@ -1,4 +1,3 @@
- 
 import {
   BeforeCreate,
   BeforeUpdate,
@@ -15,7 +14,7 @@ import {
 
 import { BookRecommendation } from '#cds-models/CatalogService';
 
-import type { TypedRequest, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
+import type { Request, NextEvent } from '@dxfrontier/cds-ts-dispatcher';
 
 @EntityHandler(BookRecommendation)
 class BookRecommendationsHandler {
@@ -24,26 +23,26 @@ class BookRecommendationsHandler {
   @BeforeCreate()
   @Validate<BookRecommendation>({ action: 'isLowercase' }, 'comment')
   @Validate<BookRecommendation>({ action: 'endsWith', target: 'N' }, 'description')
-  public async beforeCreate(@Req() req: TypedRequest<BookRecommendation>) {
+  public async beforeCreate(@Req() req: Request<BookRecommendation>) {
     // ...
   }
 
   @BeforeUpdate()
   @Validate<BookRecommendation>({ action: 'startsWith', target: 'COMMENT:' }, 'comment')
   @Validate<BookRecommendation>({ action: 'isAlphanumeric' }, 'description')
-  public async beforeUpdate(@Req() req: TypedRequest<BookRecommendation>) {
+  public async beforeUpdate(@Req() req: Request<BookRecommendation>) {
     // ...
   }
 
   @OnCreate()
   @Validate<BookRecommendation>({ action: 'isAlphanumeric' }, 'book_ID')
-  public async create(@Req() req: TypedRequest<BookRecommendation>, @Next() next: NextEvent): Promise<Function> {
+  public async create(@Req() req: Request<BookRecommendation>, @Next() next: NextEvent): Promise<Function> {
     return next();
   }
 
   @OnUpdate()
   @Validate<BookRecommendation>({ action: 'isLength', options: { min: 5 } }, 'comment')
-  public async update(@Req() req: TypedRequest<BookRecommendation>, @Next() next: NextEvent): Promise<Function> {
+  public async update(@Req() req: Request<BookRecommendation>, @Next() next: NextEvent): Promise<Function> {
     return next();
   }
 }
