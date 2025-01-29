@@ -3,7 +3,7 @@ import { Inject, ServiceLogic, CDS_DISPATCHER } from '@dxfrontier/cds-ts-dispatc
 import BookRepository from '../repository/BookRepository';
 import BookStatsRepository from '../repository/BookStatsRepository';
 
-import type { ActionRequest, Request, Service, TypedRequest } from '@dxfrontier/cds-ts-dispatcher';
+import type { ActionRequest, Request, Service } from '@dxfrontier/cds-ts-dispatcher';
 import type { BookStat } from '#cds-models/CatalogService';
 
 @ServiceLogic()
@@ -24,7 +24,7 @@ class BookStatsService {
     req.notify(201, 'On Create executed');
   }
 
-  public async updatedViews(req: TypedRequest<BookStat>) {
+  public async updatedViews(req: Request<BookStat>) {
     await this.bookStatsRepository.update({ ID: 2 }, { views: 444233 });
     return await this.bookStatsRepository.getAll();
   }

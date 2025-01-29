@@ -1,12 +1,4 @@
-import {
-  ActionRequest,
-  CDS_DISPATCHER,
-  Inject,
-  Request,
-  Service,
-  ServiceLogic,
-  TypedRequest,
-} from '@dxfrontier/cds-ts-dispatcher';
+import { ActionRequest, CDS_DISPATCHER, Inject, Request, Service, ServiceLogic } from '@dxfrontier/cds-ts-dispatcher';
 
 import BookRepository from '../repository/BookRepository';
 
@@ -56,7 +48,7 @@ class BookService {
     }
   }
 
-  public async addDefaultTitleText(result: Book, req: TypedRequest<Book>) {
+  public async addDefaultTitleText(result: Book, req: Request<Book>) {
     await this.bookRepository.update({ ID: req.data.ID }, { title: 'Dracula' });
   }
 
