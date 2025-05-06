@@ -1,4 +1,12 @@
-import { ActionRequest, CDS_DISPATCHER, Inject, Request, Service, ServiceLogic } from '@dxfrontier/cds-ts-dispatcher';
+import {
+  ActionRequest,
+  CDS_DISPATCHER,
+  Inject,
+  Request,
+  RequestResponse,
+  Service,
+  ServiceLogic,
+} from '@dxfrontier/cds-ts-dispatcher';
 
 import BookRepository from '../repository/BookRepository';
 
@@ -28,8 +36,20 @@ class BookService {
 
   // PUBLIC routines
 
-  public async manageAfterReadMethods(args: { req: Request; results: Book[]; singleInstance: boolean; users: any[] }) {
+  public async manageAfterReadMethods(args: {
+    req: Request;
+    res: RequestResponse;
+    results: Book[];
+    singleInstance: boolean;
+    jwt: string | undefined;
+    env: string;
+  }) {
+    args.res.setHeader('token', args.jwt ?? '');
+    args.res.setHeader('res', 'res');
+    args.res.setHeader('env', args.env);
+
     await this.emitOrderedBookData(args.req);
+
     this.notifySingleInstance(args.req, args.singleInstance);
     this.enrichTitle(args.results);
   }

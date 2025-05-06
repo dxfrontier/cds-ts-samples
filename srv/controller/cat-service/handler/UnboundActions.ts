@@ -1,32 +1,54 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   CDS_DISPATCHER,
   Error,
   FieldsFormatter,
+  GetRequest,
   Inject,
+  Msg,
   Next,
   OnAction,
   OnError,
   OnEvent,
   OnFunction,
+  OnSubscribe,
+  Prepend,
   Req,
+  Res,
   Service,
   UnboundActions,
   Use,
   Validate,
 } from '@dxfrontier/cds-ts-dispatcher';
 
-import { changeBookProperties, OrderedBook, submitOrder, submitOrderFunction } from '#cds-models/CatalogService';
+import {
+  changeBookProperties,
+  event_2,
+  OrderedBook,
+  submitOrder,
+  submitOrderFunction,
+} from '#cds-models/CatalogService';
 import { MiddlewareEntity1 } from '../../../middleware/MiddlewareEntity1';
 import { MiddlewareEntity2 } from '../../../middleware/MiddlewareEntity2';
 
-import type { ExposeFields, ActionReturn, ActionRequest, NextEvent, Request } from '@dxfrontier/cds-ts-dispatcher';
+import type {
+  ExposeFields,
+  ActionReturn,
+  ActionRequest,
+  NextEvent,
+  Request,
+  RequestResponse,
+  SubscriberType,
+} from '@dxfrontier/cds-ts-dispatcher';
 
 @UnboundActions()
 @Use(MiddlewareEntity1, MiddlewareEntity2)
 class UnboundActionsHandler {
   @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
 
-  @OnAction(changeBookProperties)
+  @OnAction('changeBookProperties')
   @FieldsFormatter<ExposeFields<typeof changeBookProperties>>({ action: 'toLower' }, 'language')
   @FieldsFormatter<ExposeFields<typeof changeBookProperties>>({ action: 'ltrim' }, 'language')
   @Validate<ExposeFields<typeof changeBookProperties>>({ action: 'isIn', values: ['PDF', 'E-Kindle'] }, 'format')
@@ -40,17 +62,35 @@ class UnboundActionsHandler {
     };
   }
 
-  @OnAction(submitOrder)
-  public async submitOrder(
+  @Prepend({ eventDecorator: 'OnAction', actionName: 'submitOrder' })
+  public async prependAction(
     @Req() req: ActionRequest<typeof submitOrder>,
     @Next() next: NextEvent,
+  ): Promise<Function> {
+    req.locale = 'DE_de';
+    return next();
+  }
+
+  @Prepend({ eventDecorator: 'OnEvent', eventName: OrderedBook })
+  public async prependEvent(@Req() req: Request<OrderedBook>): Promise<void> {
+    req.locale = 'DE_de';
+  }
+
+  @OnAction('submitOrder')
+  public async submitOrder(
+    @Req() req: ActionRequest<typeof submitOrder>,
+    @Res() res: RequestResponse,
+    @GetRequest('locale') locale: Request['locale'],
+    @Next() next: NextEvent,
   ): ActionReturn<typeof submitOrder> {
+    res.setHeader('Content-Language', locale);
+
     return {
       stock: req.data.quantity! + 1,
     };
   }
 
-  @OnFunction(submitOrderFunction)
+  @OnFunction('submitOrderFunction')
   public async submitOrderFunction(
     @Req() req: ActionRequest<typeof submitOrderFunction>,
     @Next() next: NextEvent,
@@ -61,7 +101,8 @@ class UnboundActionsHandler {
   }
 
   @OnEvent(OrderedBook)
-  public async orderedBook(req: Request<OrderedBook>) {
+  public async orderedBook(@Req() req: Request<OrderedBook>, @Res() res: RequestResponse): Promise<void> {
+    res.setHeader('Content-Language', 'DE_de');
     if (req.event !== 'OrderedBook') {
       req.reject(400, 'Not OrderedBook: check @OnEvent decorator');
     }
@@ -73,6 +114,41 @@ class UnboundActionsHandler {
       err.message = 'OnError';
     }
   }
+
+  @OnSubscribe({
+    eventName: event_2,
+    type: 'MESSAGE_BROKER',
+    showReceiverMessage: true,
+  })
+  private async onProductMessaging(@Msg() msg: SubscriberType<{ foo: number; bar: string }>): Promise<void> {
+    const data = msg.data;
+  }
+
+  @OnSubscribe({
+    eventName: 'event_1',
+    type: 'SAME_NODE_PROCESS',
+    showReceiverMessage: true,
+    consoleStyle: 'table',
+  })
+  private async onProductSubscribe(@Req() req: Request<any>, @Res() res: RequestResponse): Promise<void> {
+    res.setHeader('CustomHeader', 'OnSubscribeTriggered_event_1');
+  }
+
+  @OnSubscribe({
+    eventName: 'event_3',
+    type: 'SAME_NODE_PROCESS_DIFFERENT_SERVICE',
+    externalServiceName: 'ProductsService',
+    showReceiverMessage: true,
+  })
+  private async onProductMessaging3(
+    @Req() req: SubscriberType<{ foo: number; bar: string }>,
+    @Res() res: RequestResponse,
+  ): Promise<void> {
+    res.setHeader('CustomHeader', 'OnSubscribeTriggered_event_3');
+  }
+
+  @OnEvent('event_1')
+  private async bla(@Req() req: SubscriberType<{ foo: number; bar: string }>): Promise<void> {}
 }
 
 export default UnboundActionsHandler;

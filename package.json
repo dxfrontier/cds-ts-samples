@@ -27,25 +27,25 @@
     "build": "run-s build:cds:message build:cds build:ts:message build:ts build:srv:clean:ts:message build:srv:clean:ts"
   },
   "dependencies": {
-    "@dxfrontier/cds-ts-dispatcher": "4.0.1",
-    "@dxfrontier/cds-ts-repository": "^5.1.6",
-    "@sap/cds": "^8.7.2",
-    "@sap/xssec": "^4.4.0",
-    "axios": "^1.8.0",
+    "@dxfrontier/cds-ts-dispatcher": "4.2.1",
+    "@dxfrontier/cds-ts-repository": "^5.2.1",
+    "@sap/cds": "^8.9.2",
+    "@sap/xssec": "^4.6.0",
+    "axios": "^1.9.0",
     "passport": "^0.7.0"
   },
   "devDependencies": {
-    "@cap-js/cds-typer": "^0.33.0",
-    "@cap-js/cds-types": "^0.9.0",
-    "@cap-js/sqlite": "^1.8.0",
-    "@sap/cds-lsp": "^8.5.1",
-    "@types/node": "^22.13.5",
-    "eslint": "^9.21.0",
+    "@cap-js/cds-typer": "^0.34.0",
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^1.11.0",
+    "@sap/cds-lsp": "^8.9.1",
+    "@types/node": "^22.15.12",
+    "eslint": "^9.26.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "3.5.2",
+    "prettier": "3.5.3",
     "rimraf": "^6.0.1",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.25.0"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.0"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js",
@@ -53,6 +53,12 @@
   },
   "cds": {
     "requires": {
+      "messaging": {
+        "kind": "file-based-messaging"
+      },
+      "db": {
+        "kind": "sql"
+      },
       "auth": {
         "kind": "basic",
         "users": {
