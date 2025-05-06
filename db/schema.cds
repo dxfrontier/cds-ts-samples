@@ -28,7 +28,6 @@ entity Books : managed {
       // Associations
       author              : Association to Authors @mandatory;
       genre               : Association to Genres;
-      promotion           : Association to Promotions;
 
       reviews             : Association to many Reviews
                               on reviews.book = $self;
@@ -41,6 +40,8 @@ entity Books : managed {
 
       bookRecomanddations : Association to many BookRecommendations
                               on bookRecomanddations.book = $self;
+
+      series              : Association to BookSeries;
 
 }
 
@@ -95,14 +96,39 @@ entity BookEvents : managed, cuid {
 
 }
 
-entity BookSales : managed, cuid {
-  saleDate   : Date; // Date of the sale
-  saleAmount : Decimal; // Amount of the sale
-  quantity   : Integer; // Quantity of books sold
+entity BookSales : managed {
+  key ID         : Integer;
+      saleDate   : Date; // Date of the sale
+      saleAmount : Decimal; // Amount of the sale
+      quantity   : Integer; // Quantity of books sold
 
-  // Associations
-  book       : Association to Books;
-  customer   : Association to Users;
+      // Associations
+      book       : Association to Books;
+      customer   : Association to Users;
+}
+
+entity Wishlists : managed {
+  key ID      : Integer;
+      user    : Association to Users; // Associated user
+      book    : Association to Books; // Book added to wishlist
+      addedAt : DateTime; // Timestamp when added
+}
+
+entity ShoppingCart : managed {
+  key ID       : Integer;
+      user     : Association to Users; // User who owns the cart
+      book     : Association to Books; // Book in cart
+      quantity : Integer @mandatory; // Quantity selected
+      addedAt  : DateTime; // When item was added
+      notes    : String(500); // Optional gift notes/special requests
+}
+
+entity BookSeries : managed {
+  key ID          : Integer;
+      name        : String(255) @mandatory; // Name of the series
+      description : String(1000);
+      books       : Association to many Books
+                      on books.series = $self;
 }
 
 
@@ -133,8 +159,7 @@ entity Promotions {
       startDate   : Date        @mandatory;
       endDate     : Date        @mandatory;
       discount    : Decimal     @mandatory;
-      books       : Association to many Books
-                      on books.promotion = $self;
+      books       : Association to many Books;
 }
 
 entity BookOrders : managed {

@@ -5,18 +5,18 @@ import {
   AfterDelete,
   AfterRead,
   AfterReadEachInstance,
+  AfterReadSingleInstance,
   AfterUpdate,
   BeforeRead,
   CDS_DISPATCHER,
   EntityHandler,
   Env,
-  // Env,
   GetRequest,
   Inject,
   IsColumnSupplied,
   IsPresent,
   IsRole,
-  // Jwt,
+  Jwt,
   Prepend,
   Req,
   Res,
@@ -42,6 +42,7 @@ import type { RequestResponse, Request } from '@dxfrontier/cds-ts-dispatcher';
 @Use(MiddlewareEntity1, MiddlewareEntity2)
 class BookHandler {
   @Inject(CDS_DISPATCHER.SRV) private readonly srv: Service;
+  @Inject(CDS_DISPATCHER.OUTBOXED_SRV) private readonly outboxedSrv: Service;
   @Inject(BookService) private readonly bookService: BookService;
 
   @Prepend({ eventDecorator: 'AfterReadSingleInstance' })
@@ -89,19 +90,31 @@ class BookHandler {
     this.bookService.showConsoleLog();
   }
 
+  @AfterReadSingleInstance()
+  private async afterReadSingleInstance(
+    @Req() req: Request,
+    @Res() res: RequestResponse,
+    @Result() result: Book,
+    @GetRequest('locale') locale: Request['locale'],
+  ): Promise<void> {
+    res.setHeader('Accept-Language', locale);
+  }
+
   @AfterRead()
   @Use(MiddlewareMethodAfterRead1, MiddlewareMethodAfterRead2)
   private async afterRead(
     @Req() req: Request,
+    @Res() res: RequestResponse,
     @Results() results: Book[],
     @SingleInstanceSwitch() singleInstance: boolean,
     @IsColumnSupplied<Book>('price') hasPrice: boolean,
     @IsPresent('SELECT', 'columns') hasColumns: boolean,
     @IsRole('Developer', 'AnotherRole') role: boolean,
     @GetRequest('locale') locale: Request['locale'],
-    @Env<CDS_ENV>('requires.auth.users') users: any[],
+    @Jwt() jwt: string | undefined,
+    @Env<CDS_ENV>('requires.auth.kind') env: CDS_ENV['requires']['auth']['kind'],
   ): Promise<void> {
-    await this.bookService.manageAfterReadMethods({ req, results, singleInstance, users });
+    await this.bookService.manageAfterReadMethods({ req, res, results, singleInstance, jwt, env });
   }
 
   @AfterUpdate()

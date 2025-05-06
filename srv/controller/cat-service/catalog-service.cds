@@ -10,39 +10,47 @@ service CatalogService {
   entity BookRecommendations as projection on Base.BookRecommendations;
   entity BookFormats         as projection on Base.BookFormats;
   entity BookSales           as projection on Base.BookSales;
+  entity Wishlists           as projection on Base.Wishlists;
+  entity ShoppingCart        as projection on Base.ShoppingCart;
+  entity BookSeries          as projection on Base.BookSeries;
 
   @odata.draft.enabled: true
   entity BookEvents          as projection on Base.BookEvents;
 
   entity BookStats           as projection on Base.BookStats
     actions { // Bound action / function
-      action   GenerateReport(ID : Books:ID) returns {
-        book : Books:title;
-        stats : BookStats:views;
-        rating : BookStats:averageRating
+      action   GenerateReport(ID : Books : ID) returns {
+        book                             : Books : title;
+        stats                            : BookStats : views;
+        rating                           : BookStats : averageRating
       };
-      function NotifyAuthor(ID : Authors:ID) returns Boolean;
+      function NotifyAuthor(ID : Authors : ID) returns Boolean;
     };
 
   // Unbound action
-  action   changeBookProperties(format : BookFormats:format, language : BookFormats:language) returns {
-    language : String;
-    format : BookFormats:format
+  action   changeBookProperties(format : BookFormats : format, language : BookFormats : language) returns {
+    language                                         : String;
+    format                                           : BookFormats : format
   };
 
   // Unbound action
-  action   submitOrder(book : Books:ID, quantity : Integer)                                   returns {
-    stock : Integer
+  action   submitOrder(book : Books : ID, quantity : Integer)                                     returns {
+    stock                           : Integer
   };
 
   // Unbound function
-  function submitOrderFunction(book : Books:ID, quantity : Integer)                           returns {
-    stock : Integer
+  function submitOrderFunction(book : Books : ID, quantity : Integer)                             returns {
+    stock                                   : Integer
   };
 
   event OrderedBook : {
-    book     : Books:ID;
+    book     : Books : ID;
     quantity : Integer;
     buyer    : String
   };
+
+  event event_2 : {
+    foo : Integer;
+    bar : String;
+  }
 }
