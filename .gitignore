@@ -4,8 +4,6 @@ gen
 mta_archives
 *.mtar
 
-@cds-models
-
 ############################
 
 # Logs
@@ -139,4 +137,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .DS_Store
-@dispatcher
+@dispatcher/
+@cds-models/
