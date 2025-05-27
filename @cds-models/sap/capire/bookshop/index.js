@@ -1,54 +1,62 @@
 // This is an automatically generated file. Please do not change its contents manually!
-const cds = require('@sap/cds')
-const csn = cds.entities('sap.capire.bookshop')
+const { createEntityProxy } = require('./../../../_')
 // Books
-module.exports.Book = { is_singular: true, __proto__: csn.Books }
-module.exports.Books = csn.Books
+module.exports.Book = createEntityProxy(['sap.capire.bookshop', 'Books'], { target: { is_singular: true } })
+module.exports.Books = createEntityProxy(['sap.capire.bookshop', 'Books'], { target: { is_singular: false }})
 // Publishers
-module.exports.Publisher = { is_singular: true, __proto__: csn.Publishers }
-module.exports.Publishers = csn.Publishers
+module.exports.Publisher = createEntityProxy(['sap.capire.bookshop', 'Publishers'], { target: { is_singular: true } })
+module.exports.Publishers = createEntityProxy(['sap.capire.bookshop', 'Publishers'], { target: { is_singular: false }})
 // BookStats
-module.exports.BookStat = { is_singular: true, __proto__: csn.BookStats }
-module.exports.BookStats = csn.BookStats
+module.exports.BookStat = createEntityProxy(['sap.capire.bookshop', 'BookStats'], { target: { is_singular: true } })
+module.exports.BookStats = createEntityProxy(['sap.capire.bookshop', 'BookStats'], { target: { is_singular: false }})
 // Authors
-module.exports.Author = { is_singular: true, __proto__: csn.Authors }
-module.exports.Authors = csn.Authors
+module.exports.Author = createEntityProxy(['sap.capire.bookshop', 'Authors'], { target: { is_singular: true } })
+module.exports.Authors = createEntityProxy(['sap.capire.bookshop', 'Authors'], { target: { is_singular: false }})
 // Genres
-module.exports.Genre = { is_singular: true, __proto__: csn.Genres }
-module.exports.Genres = csn.Genres
+module.exports.Genre = createEntityProxy(['sap.capire.bookshop', 'Genres'], { target: { is_singular: true } })
+module.exports.Genres = createEntityProxy(['sap.capire.bookshop', 'Genres'], { target: { is_singular: false }})
 // Reviews
-module.exports.Review = { is_singular: true, __proto__: csn.Reviews }
-module.exports.Reviews = csn.Reviews
+module.exports.Review = createEntityProxy(['sap.capire.bookshop', 'Reviews'], { target: { is_singular: true } })
+module.exports.Reviews = createEntityProxy(['sap.capire.bookshop', 'Reviews'], { target: { is_singular: false }})
 // BookEvents
-module.exports.BookEvent = { is_singular: true, __proto__: csn.BookEvents }
-module.exports.BookEvents = csn.BookEvents
+module.exports.BookEvent = createEntityProxy(['sap.capire.bookshop', 'BookEvents'], { target: { is_singular: true } })
+module.exports.BookEvents = createEntityProxy(['sap.capire.bookshop', 'BookEvents'], { target: { is_singular: false }})
 // BookSales
-module.exports.BookSale = { is_singular: true, __proto__: csn.BookSales }
-module.exports.BookSales = csn.BookSales
+module.exports.BookSale = createEntityProxy(['sap.capire.bookshop', 'BookSales'], { target: { is_singular: true } })
+module.exports.BookSales = createEntityProxy(['sap.capire.bookshop', 'BookSales'], { target: { is_singular: false }})
+// Wishlists
+module.exports.Wishlist = createEntityProxy(['sap.capire.bookshop', 'Wishlists'], { target: { is_singular: true } })
+module.exports.Wishlists = createEntityProxy(['sap.capire.bookshop', 'Wishlists'], { target: { is_singular: false }})
+// ShoppingCart
+module.exports.ShoppingCart = createEntityProxy(['sap.capire.bookshop', 'ShoppingCart'], { target: { is_singular: true } })
+module.exports.ShoppingCart_ = createEntityProxy(['sap.capire.bookshop', 'ShoppingCart'], { target: { is_singular: false }})
+// BookSeries
+module.exports.BookSery = createEntityProxy(['sap.capire.bookshop', 'BookSeries'], { target: { is_singular: true } })
+module.exports.BookSeries = createEntityProxy(['sap.capire.bookshop', 'BookSeries'], { target: { is_singular: false }})
 // Users
-module.exports.User = { is_singular: true, __proto__: csn.Users }
-module.exports.Users = csn.Users
+module.exports.User = createEntityProxy(['sap.capire.bookshop', 'Users'], { target: { is_singular: true } })
+module.exports.Users = createEntityProxy(['sap.capire.bookshop', 'Users'], { target: { is_singular: false }})
 // UserActivityLog
-module.exports.UserActivityLog = { is_singular: true, __proto__: csn.UserActivityLog }
-module.exports.UserActivityLog_ = csn.UserActivityLog
+module.exports.UserActivityLog = createEntityProxy(['sap.capire.bookshop', 'UserActivityLog'], { target: { is_singular: true } })
+module.exports.UserActivityLog_ = createEntityProxy(['sap.capire.bookshop', 'UserActivityLog'], { target: { is_singular: false }})
 // Promotions
-module.exports.Promotion = { is_singular: true, __proto__: csn.Promotions }
-module.exports.Promotions = csn.Promotions
+module.exports.Promotion = createEntityProxy(['sap.capire.bookshop', 'Promotions'], { target: { is_singular: true } })
+module.exports.Promotions = createEntityProxy(['sap.capire.bookshop', 'Promotions'], { target: { is_singular: false }})
 // BookOrders
-module.exports.BookOrder = { is_singular: true, __proto__: csn.BookOrders }
-module.exports.BookOrders = csn.BookOrders
+module.exports.BookOrder = createEntityProxy(['sap.capire.bookshop', 'BookOrders'], { target: { is_singular: true } })
+module.exports.BookOrders = createEntityProxy(['sap.capire.bookshop', 'BookOrders'], { target: { is_singular: false }})
 // BookRecommendations
-module.exports.BookRecommendation = { is_singular: true, __proto__: csn.BookRecommendations }
-module.exports.BookRecommendations = csn.BookRecommendations
+module.exports.BookRecommendation = createEntityProxy(['sap.capire.bookshop', 'BookRecommendations'], { target: { is_singular: true } })
+module.exports.BookRecommendations = createEntityProxy(['sap.capire.bookshop', 'BookRecommendations'], { target: { is_singular: false }})
 // BookFormats
-module.exports.BookFormat = { is_singular: true, __proto__: csn.BookFormats }
-module.exports.BookFormats = csn.BookFormats
+module.exports.BookFormat = createEntityProxy(['sap.capire.bookshop', 'BookFormats'], { target: { is_singular: true } })
+module.exports.BookFormats = createEntityProxy(['sap.capire.bookshop', 'BookFormats'], { target: { is_singular: false }})
 // Books.texts
-module.exports.Books.text = { is_singular: true, __proto__: csn['Books.texts'] }
-module.exports.Books.texts = csn['Books.texts']
+module.exports.Books.text = createEntityProxy(['sap.capire.bookshop', 'Books.texts'], { target: { is_singular: true } })
+module.exports.Books.texts = createEntityProxy(['sap.capire.bookshop', 'Books.texts'], { target: { is_singular: false }})
 // Genres.texts
-module.exports.Genres.text = { is_singular: true, __proto__: csn['Genres.texts'] }
-module.exports.Genres.texts = csn['Genres.texts']
+module.exports.Genres.text = createEntityProxy(['sap.capire.bookshop', 'Genres.texts'], { target: { is_singular: true } })
+module.exports.Genres.texts = createEntityProxy(['sap.capire.bookshop', 'Genres.texts'], { target: { is_singular: false }})
 // events
 // actions
 // enums
