@@ -12,19 +12,15 @@
     "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "ES2021",
+    "target": "esnext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "outDir": "./gen/srv",
     "rootDir": ".",
     "paths": {
-      "#cds-models/*": [
-        "./@cds-models/*/index.ts"
-      ]
-    }
+      "#cds-models/*": ["./@cds-models/*", "./@cds-models/*/index.ts"]
+    },
+    "sourceMap": true
   },
-  "include": [
-    "./srv",
-    "./@dispatcher"
-  ]
+  "include": ["./srv", "./@dispatcher"]
 }
