@@ -1,0 +1,32 @@
+{
+  "name": "test_cds",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@dxfrontier/cds-ts-dispatcher": "^5.0.1",
+    "@dxfrontier/cds-ts-repository": "^6.0.0",
+    "@sap/cds": "^9",
+    "express": "^4"
+  },
+  "engines": {
+    "node": "^22"
+  },
+  "devDependencies": {
+    "@cap-js/cds-typer": ">=0.1",
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^2",
+    "@types/node": "^22.0.0",
+    "tsx": "^4",
+    "typescript": "^5"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "imports": {
+    "#cds-models/*": "./@cds-models/*/index.js",
+    "#dispatcher": "./@dispatcher/index.js"
+  }
+}

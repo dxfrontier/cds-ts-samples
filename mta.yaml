@@ -57,6 +57,11 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
       - name: cds-ts-samples-auth
+    provides:
+      - name: app-api
+        properties:
+          app-protocol: ${protocol}
+          app-uri: ${default-uri}
 
 resources:
   - name: cds-ts-samples-correct-version-db

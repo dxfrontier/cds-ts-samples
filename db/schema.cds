@@ -159,7 +159,7 @@ entity Promotions {
       startDate   : Date        @mandatory;
       endDate     : Date        @mandatory;
       discount    : Decimal     @mandatory;
-      books       : Association to many Books;
+      books       : Association to Books;
 }
 
 entity BookOrders : managed {
