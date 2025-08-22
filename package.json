@@ -29,21 +29,20 @@
   "dependencies": {
     "@dxfrontier/cds-ts-dispatcher": "^5",
     "@dxfrontier/cds-ts-repository": "^6",
-    "@sap/cds": "^9",
-    "express": "^4"
+    "@sap/cds": "^9"
   },
   "devDependencies": {
-    "eslint": "^9.30.1",
+    "eslint": "^9.33.0",
     "npm-run-all": "^4.1.5",
     "prettier": "3.6.2",
     "rimraf": "^6.0.1",
-    "typescript-eslint": "^8.35.1",
-    "@cap-js/cds-typer": ">=0.1",
-    "@cap-js/cds-types": "^0.12.0",
-    "@cap-js/sqlite": "^2",
-    "@types/node": "^22.0.0",
+    "typescript-eslint": "^8.40.0",
+    "@cap-js/cds-typer": ">=0.36.0",
+    "@cap-js/cds-types": "^0.13.0",
+    "@cap-js/sqlite": "^2.0.2",
+    "@types/node": "^24.3.0",
     "tsx": "^4",
-    "typescript": "^5"
+    "typescript": "^5.9.2"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js",
