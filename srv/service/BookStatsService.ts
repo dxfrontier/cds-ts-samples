@@ -34,7 +34,7 @@ class BookStatsService {
   }
 
   public async handleReport(req: ActionRequest<typeof BookStat.actions.GenerateReport>) {
-    const statsID = req.params[0] as string;
+    const { statsID } = req.params[0];
 
     const bookStats = await this.bookStatsRepository.findOne({ ID: parseInt(statsID) });
     const book = await this.bookRepository.findOne({ ID: bookStats!.book_ID! });
